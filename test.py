@@ -3,21 +3,21 @@
 #
 
 import engine.lib.helper as helper
-import time
+import time, json
 
 mqtt = helper.MQTT()
+mqtt_sender = helper.MQTT()
 
 def mqtt_callback(client, userdata, message):
-	print("MQTT:")
-	print(client)
-	print(userdata)
-	print(message)
-	print("=== END ===")
+	try:
+		helper.log("mqtt", "received message '" + str(message.payload) + "' from topic '" + str(message.topic) + "'")
+	except Exception as e:
+		print("error: " + str(e))
 
-mqtt.on_message = mqtt_callback
+
+mqtt.on_message(mqtt_callback)
 mqtt.subscribe("test/log")
-mqtt.connect()
 
 while True:
-	mqtt.publish("test/log", "it is: " + str(int(time.time())))
+	mqtt_sender.publish("test/log", "it is: " + str(int(time.time())))
 	time.sleep(3)
