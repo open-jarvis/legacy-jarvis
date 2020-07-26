@@ -7,11 +7,18 @@
 import paho.mqtt.client as mqtt
 import time, random, string, gpiozero
 
+
+###################### HELPER FUNCTIONS ######################
 def log(type, msg):
 	logstr = "[" + time.strftime("%D %H:%M:%S", time.localtime(time.time())) + "] [" + str(type) + "] " + (" " * (5-len(type))) + str(msg)
 	print(logstr)
-	
 
+def resize(some_list, target_len):
+	return some_list[:target_len] + [0]*(target_len - len(some_list))
+
+
+
+###################### HELPER CLASSES ######################
 """
 MQTT(host=127.0.0.1, port=1883, client_id=[random])
 	.on_connect(callback[client, userdata, flags, rc])
@@ -129,13 +136,8 @@ class Lights():
 
 
 
-def resize(some_list, target_len):
-	return some_list[:target_len] + [0]*(target_len - len(some_list))
-
-
-
-""" ####### APA102 LIBRARY
-
+###################### APA102 LIBRARY ######################
+"""
 from https://github.com/tinue/APA102_Pi
 This is the main driver module for APA102 LEDs
 """

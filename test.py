@@ -3,17 +3,22 @@
 #
 
 import engine.lib.helper as helper
-import engine.lib.apa102
-import time
 
-lights = helper.Lights()
-lights.set( ["red", 0, 0, "green", 0, 0, "blue", 0, 0, "yellow", 0, 0] )
-lights.on()
+import os
+from pocketsphinx import LiveSpeech, get_model_path
 
-i = 0
-while i < 50:
-	time.sleep(0.075)
-	lights.rotate()
-	i += 1
+model_path = get_model_path()
 
-lights.off()
+speech = LiveSpeech(
+	verbose=True,
+	sampling_rate=16000,
+	buffer_size=2048,
+	no_search=False,
+	full_utt=False,
+	hmm="/home/pi/jarvis/resources/stt/acoustic_model/",
+	lm="/home/pi/jarvis/resources/stt/german.lm.bin",
+	dic="/home/pi/jarvis/resources/stt/german.dict"
+)
+
+for phrase in speech:
+	print(phrase)
