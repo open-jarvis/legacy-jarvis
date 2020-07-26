@@ -6,9 +6,9 @@ import paho.mqtt.client as mqtt
 import time, random, string
 
 def log(type, msg):
-	print("[" + time.strftime("%D %H:%M:%S", time.localtime(time.time())) + "] [" + str(type) + "] " + (" " * (5-len(type))) + str(msg))
-
-
+	logstr = "[" + time.strftime("%D %H:%M:%S", time.localtime(time.time())) + "] [" + str(type) + "] " + (" " * (5-len(type))) + str(msg)
+	print(logstr)
+	
 
 """
 MQTT(host=127.0.0.1, port=1883, client_id=[random])
