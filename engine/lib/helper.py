@@ -107,7 +107,7 @@ class Lights():
 			self.data[i * 4 + 1] = self.colors[color][0]
 			self.data[i * 4 + 2] = self.colors[color][1]
 			self.data[i * 4 + 3] = self.colors[color][2]
-		log("led", "lights: [" + ", ".join(str(_) for _ in self.data) + "]")
+		log("led", "lights: [" + ",".join(str(_) for _ in self.data) + "]")
 
 	def rotate(self, n=1):
 		log("led", "rotate")
