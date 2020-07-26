@@ -3,21 +3,17 @@
 #
 
 import engine.lib.helper as helper
-import time, json
+import engine.lib.apa102
+import time
 
-mqtt = helper.MQTT()
-mqtt_sender = helper.MQTT()
+lights = helper.Lights()
+lights.set( ["red", 0, 0, "green", 0, 0, "blue", 0, 0, "yellow", 0, 0] )
+lights.on()
 
-def mqtt_callback(client, userdata, message):
-	try:
-		helper.log("mqtt", "received message '" + str(message.payload) + "' from topic '" + str(message.topic) + "'")
-	except Exception as e:
-		print("error: " + str(e))
+i = 0
+while i < 50:
+	time.sleep(0.075)
+	lights.rotate()
+	i += 1
 
-
-mqtt.on_message(mqtt_callback)
-mqtt.subscribe("test/log")
-
-while True:
-	mqtt_sender.publish("test/log", "it is: " + str(int(time.time())))
-	time.sleep(3)
+lights.off()
