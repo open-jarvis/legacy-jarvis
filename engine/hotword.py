@@ -3,24 +3,36 @@
 #
 
 ## hotword.py - listenes for the hotword and sends a mqtt message
-## snowboy.kitt.ai
+## hotword.py uses https://snowboy.kitt.ai/
 
 ## input: nothing
 ## output: jarvis/hotword -> (detected|started|stopped|error)
 
 
 import lib.helper as helper
+import sys
+
+
+mqtt = helper.MQTT(client_id="hotword")
+
+
+if sys.version_info[0] != 2:
+	mqtt.publish("jarvis/hotword", "error")
+	helper.log("hotw", "hotword.py must be run with python 2")
+	sys.exit(-1)
+
+
 import lib.snowboy.snowboydetect as snowboydetect
 import lib.snowboy.snowboydecoder as snowboy
-import sys, signal
+import signal
 
 
 interrupted = False
-mqtt = helper.MQTT(client_id="hotword")
 
 
 def detected_callback():
 	mqtt.publish("jarvis/hotword", "detected")
+
 
 def signal_handler(signal, frame):
 	global interrupted
@@ -32,8 +44,8 @@ def interrupt_callback():
 
 
 if len(sys.argv) == 1:
-	helper.log("hotw", "no model name specified, exiting")
 	mqtt.publish("jarvis/hotword", "error")
+	helper.log("hotw", "no model name specified, exiting")
 	sys.exit(-1)
 
 

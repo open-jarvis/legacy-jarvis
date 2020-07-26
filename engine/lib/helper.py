@@ -2,6 +2,8 @@
 # Copyright (c) 2020 by Philipp Scheer. All Rights Reserved.
 #
 
+## helper.py - a helper library to simplify tasks like logging, mqtt, etc...
+
 import paho.mqtt.client as mqtt
 import time, random, string
 
