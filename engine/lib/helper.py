@@ -10,7 +10,7 @@ import time, random, string, gpiozero
 
 ###################### HELPER FUNCTIONS ######################
 def log(type, msg):
-	logstr = "[" + time.strftime("%D %H:%M:%S", time.localtime(time.time())) + "] [" + str(type) + "] " + (" " * (5-len(type))) + str(msg)
+	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (5-len(type))) + str(msg))
 	print(logstr)
 
 def resize(some_list, target_len):
@@ -36,9 +36,9 @@ class MQTT():
 		else:
 			self.client_id = str(client_id)
 		
-		log("mqtt", "creating client '" + self.client_id + "'")
+		log("mqtt", "creating client '{}'".format(self.client_id))
 		self.client = mqtt.Client(client_id=client_id)
-		log("mqtt", "connecting to '" + str(self.host) + ":" + str(self.port) + "'")
+		log("mqtt", "connecting to '{}:{}'".format(str(self.host), str(self.port)))
 		self.client.connect(self.host, self.port)
 		log("mqtt", "starting event loop")
 		self.client.loop_start()
@@ -61,7 +61,7 @@ class MQTT():
 
 
 	def publish(self, topic, payload):
-		log("mqtt", "publishing message: " + str(self.host) + ":" + str(self.port) + " -> " + str(topic) + " -> '" + str(payload) + "'")
+		log("mqtt", "publishing message: {}:{} -> {} -> '{}'".format(str(self.host), str(self.port), str(topic), str(payload)))
 		return self.client.publish(topic, payload)
 
 
@@ -72,7 +72,7 @@ class MQTT():
 		host				:	subscribe to messages on that host
 	"""
 	def subscribe(self, topic):
-		log("mqtt", "subscribing to " + str(self.host) + ":" + str(self.port) + " " + str(topic))
+		log("mqtt", "subscribing to {}:{} {}".format(str(self.host), str(self.port), str(topic)))
 		return self.client.subscribe(topic)
 
 
