@@ -10,7 +10,7 @@
 
 
 MODEL_PATH = "/home/pi/jarvis/resources/hotword/alexa.hotword"
-SENSITIVITY = 0.65
+SENSITIVITY = 0.2					## 0.6 - a lot of false positives			## 0.05 - works good...
 
 
 import lib.helper as helper
@@ -26,19 +26,31 @@ interrupted = False
 
 
 def detected_callback():
+	global interrupted, mqtt, lights
 	mqtt.publish("jarvis/hotword", "detected")
+	lights.add_color("newcolor", [ 255, 200, 60 ])
 	lights.set( [ "yellow", 0, 0, "red", 0, 0, "green", 0, 0, "blue", 0, 0 ] )
+	# lights.set( [ "newcolor", 0, 0, "newcolor", 0, 0, "newcolor", 0, 0, "newcolor", 0, 0 ] )
+
 	lights.on()
 	i = 0
 	while i < 50:
-		lights.rotate()
-		time.sleep(0.15)
-		i += 1
+		if interrupted:
+			exit(0)
+		else:
+			lights.rotate()
+			time.sleep(0.05)
+			i += 1
+	lights.off()
 
 
 def signal_handler(signal, frame):
-	global interrupted
+	global interrupted, lights, mqtt
 	interrupted = True
+	mqtt.publish("jarvis/hotword", "stopped")
+	lights.off()
+	exit(0)
+	
 
 def interrupt_callback():
 	global interrupted
@@ -62,4 +74,3 @@ detector.start(	detected_callback=detected_callback,
 
 
 detector.terminate()
-mqtt.publish("jarvis/hotword", "stopped")
