@@ -46,7 +46,7 @@ def hotword_callback(client, userdata, message):
 
 
 
-mqtt = MQTT(client_id="jarvis.stt")
+mqtt = MQTT(client_id="stt.py")
 mqtt.on_message(hotword_callback)
 mqtt.subscribe("jarvis/hotword")
 

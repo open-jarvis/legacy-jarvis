@@ -1,0 +1,20 @@
+[colors]
+base = 0,200,0
+reference = 255,255,255
+
+[animation]
+type = gradient
+spread = 1
+
+[on]
+from = brightness:0
+to = brightness:30
+duration = 2
+
+[off]
+from = brightness:30
+to = brightness:0
+duration = 2
+
+[speak]
+spread = 999
