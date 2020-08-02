@@ -41,6 +41,7 @@ mqtt = helper.MQTT(client_id="hotword.py")
 
 if "--no-doa" in sys.argv:
 	helper.log("hotw", "Not using Direction of Arrival")
+	helper.log("hotw", "This feature hasn't been implemented yet...")
 
 	interrupted = False
 
@@ -84,7 +85,7 @@ if "--no-doa" in sys.argv:
 else:
 	detector = snowboydetect.SnowboyDetect(RESOURCE_PATH.encode(), MODEL_PATH.encode())
 	detector.SetAudioGain(1)
-	detector.SetSensitivity('0.5'.encode())
+	detector.SetSensitivity(SENSITIVITY.encode())
 
 	history = collections.deque(maxlen=int(DOA_FRAMES / KWS_FRAMES))
 

@@ -12,7 +12,7 @@ import lib.helper as helper
 from lib.doa.gcc_phat import gcc_phat
 from lib.doa.mic_array import MicArray
 import numpy as np
-import time, sys, collections, argparse, configparser, traceback
+import time, sys, collections, argparse, configparser, traceback, math
 
 
 def handler(client, userdata, message):
@@ -21,22 +21,27 @@ def handler(client, userdata, message):
 
 	try:
 		if data == "on":
-			_from = animation["on"]["from"].split(":")
-			_to = animation["on"]["to"].split(":")
-			duration = float(animation["on"]["duration"])
-			num_frames = int(duration / SLEEP_DURATION)
+			led_circle = ["main"]
+			for i in range(len(GRADIENTS)):
+				lights.add_color("gradient" + str(i), GRADIENTS[i])
+				led_circle.append("gradient" + str(i))
 
-			# for i in range(num_frames):
-			# 	if TYPE == "gradient":
-			led_circle = calculate_led_circle(MAIN_COLOR, SECONDARY_COLOR, GRADIENTS, direction)
-			print(led_circle)
-			print(len(led_circle))
-			print(position)
-				# time.sleep(SLEEP_DURATION)
+			led_circle.append("secondary")
 
-			lights.set(led_circle, raw=True)
-			lights.rotate(position)
+			for i in range(len(GRADIENTS)-1, -1, -1):
+				led_circle.append("gradient" + str(i))
+
+			for i in range(12 - len(GRADIENTS)*2 - 2):
+				led_circle.append("main")
+
+			lights.set(led_circle)
+			lights.rotate(-position + SPREAD)
 			lights.on()
+
+			helper.log("lights", "turning on led circle at degree:position {}:{}".format(direction, position))
+
+		if data == "off":
+			lights.off()
 
 		if data.startswith("direction:"):
 			direction = int(float(data.split(":")[1]))
@@ -44,6 +49,7 @@ def handler(client, userdata, message):
 	except Exception as e:
 		print("exception")
 		traceback.print_exc()
+	
 
 def calculate_led_circle(main, secondary, gradients, direction):
 	led_data = [[0] + _ for _ in gradients] + [0] + secondary + [[0] + _ for _ in gradients[::-1]] + ([0] + main) * (12 - 2*len(gradients) - 1)

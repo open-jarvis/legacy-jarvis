@@ -1,22 +1,20 @@
 [colors]
-main = 0,255,0
-secondary = 0,0,255
+main = 0,0,255
+secondary = 0,255,0
 
 [animation]
 type = gradient
 width = 1
 spread = 1
-sleep_duration = 0.1
+sleep_duration = 0.05
 
 [on]
-from = brightness:0
-to = brightness:30
-duration = 2
+animation = fade
+duration = 0.5
 
 [off]
-from = brightness:30
-to = brightness:0
-duration = 2
+animation = fade
+duration = 0.5
 
 [speak]
 spread = 999
