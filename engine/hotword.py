@@ -23,7 +23,6 @@ parser = argparse.ArgumentParser(description="Hotword listener using KITT.ai sno
 parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
 args = parser.parse_args()
 
-
 config = configparser.ConfigParser()
 config.read(args.config)
 
@@ -97,9 +96,9 @@ else:
 				if ans > 0:
 					frames = np.concatenate(history)
 					direction = mic.get_direction(frames)
-					position = int((direction + 15) % 360 / 30) % 8
 					mqtt.publish("jarvis/hotword", "detected")
-					mqtt.publish("jarvis/lights", "")
+					mqtt.publish("jarvis/lights", "direction:" + str(direction))
+					mqtt.publish("jarvis/lights", "on")
 
 	except KeyboardInterrupt:
 		pass

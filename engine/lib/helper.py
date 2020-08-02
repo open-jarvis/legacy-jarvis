@@ -5,7 +5,7 @@
 ## helper.py - a helper library to simplify tasks like logging, mqtt, etc...
 
 import paho.mqtt.client as mqtt
-import time, random, string, gpiozero
+import time, random, string, gpiozero, collections
 
 
 ###################### HELPER FUNCTIONS ######################
@@ -15,6 +15,12 @@ def log(type, msg):
 
 def resize(some_list, target_len):
 	return some_list[:target_len] + [0]*(target_len - len(some_list))
+
+def flatten(x):
+    if isinstance(x, collections.Iterable):
+        return [a for i in x for a in flatten(i)]
+    else:
+        return [x]
 
 
 
@@ -82,6 +88,7 @@ Lights()
 	.on()
 	.off()
 	.rotate()
+	.add_color(name, [r,g,b])
 """
 class Lights():
 	def __init__(self, pixels=12):
@@ -107,15 +114,23 @@ class Lights():
 		}
 
 
-	def set(self, lights_arr):
-		self.lights_arr = resize(lights_arr, self.pixels)
-		self.data = [0] * 4 * 12
-		for i in range(len(lights_arr)):
-			color = lights_arr[i]
-			self.data[i * 4 + 1] = self.colors[color][0]
-			self.data[i * 4 + 2] = self.colors[color][1]
-			self.data[i * 4 + 3] = self.colors[color][2]
-		# log("led", "lights: [" + ",".join(str(_) for _ in self.data) + "]")
+	def set(self, lights_arr, raw=False):
+		if raw:
+			self.data = lights_arr
+			self.lights_arr = lights_arr
+		else:
+			if len(lights_arr) == 4 * self.pixels:
+				self.data = lights_arr
+				return
+			
+			self.lights_arr = resize(lights_arr, self.pixels)
+			self.data = [0] * 4 * 12
+			for i in range(len(lights_arr)):
+				color = lights_arr[i]
+				self.data[i * 4 + 1] = self.colors[color][0]
+				self.data[i * 4 + 2] = self.colors[color][1]
+				self.data[i * 4 + 3] = self.colors[color][2]
+			# log("led", "lights: [" + ",".join(str(_) for _ in self.data) + "]")
 
 
 	def rotate(self, n=1):

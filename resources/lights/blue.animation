@@ -1,10 +1,12 @@
 [colors]
-base = 0,200,0
-reference = 255,255,255
+main = 0,255,0
+secondary = 0,0,255
 
 [animation]
 type = gradient
+width = 1
 spread = 1
+sleep_duration = 0.1
 
 [on]
 from = brightness:0
