@@ -38,7 +38,11 @@ def hotword_callback(client, userdata, message):
 			audio_device=0,
 			hmm="/home/pi/jarvis/resources/stt/acoustic_model/",
 			lm="/home/pi/jarvis/resources/stt/german.lm.bin",
+<<<<<<< HEAD
 			dic="/home/pi/jarvis/resources/stt/german.min.dict"
+=======
+			dic="/home/pi/jarvis/resources/stt/german.dict"
+>>>>>>> stt
 		)
 
 		for phrase in speech:
@@ -46,7 +50,11 @@ def hotword_callback(client, userdata, message):
 
 
 
+<<<<<<< HEAD
 mqtt = MQTT(client_id="stt.py")
+=======
+mqtt = MQTT(client_id="jarvis.stt")
+>>>>>>> stt
 mqtt.on_message(hotword_callback)
 mqtt.subscribe("jarvis/hotword")
 
