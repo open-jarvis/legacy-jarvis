@@ -124,18 +124,10 @@ class Lights():
 		self.data = [0] * 4 * 12
 		for i in range(len(lights_arr)):
 			color = lights_arr[i]
-<<<<<<< HEAD
 			self.data[i * 4 + 1] = float(self.colors[color][0]) * float(self.brightness[i])
 			self.data[i * 4 + 2] = float(self.colors[color][1]) * float(self.brightness[i])
 			self.data[i * 4 + 3] = float(self.colors[color][2]) * float(self.brightness[i])
 		# log("led", "lights: [" + ",".join(str(_) for _ in self.data) + "]")
-=======
-			self.data[i * 4 + 1] = self.colors[color][0]
-			self.data[i * 4 + 2] = self.colors[color][1]
-			self.data[i * 4 + 3] = self.colors[color][2]
-		# log("led", "lights: [" + ",".join(str(_) for _ in self.data) + "]")
-
->>>>>>> stt
 
 	def rotate(self, n=1):
 		# log("led", "rotate")
@@ -159,7 +151,6 @@ class Lights():
 		self.power_on = False
 		# log("led", "off")
 
-<<<<<<< HEAD
 	def set_brightness(self, arr):
 		try:
 			if len(arr) != 12:
@@ -169,8 +160,6 @@ class Lights():
 		self.brightness = arr
 		self.set(self.lights_arr)
 		self.on()
-=======
->>>>>>> stt
 
 	def add_color(self, name, code):
 		self.colors[name] = code
