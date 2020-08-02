@@ -5,7 +5,7 @@
 ## helper.py - a helper library to simplify tasks like logging, mqtt, etc...
 
 import paho.mqtt.client as mqtt
-import time, random, string, gpiozero
+import time, random, string, gpiozero, collections
 
 
 ###################### HELPER FUNCTIONS ######################
@@ -15,6 +15,12 @@ def log(type, msg):
 
 def resize(some_list, target_len):
 	return some_list[:target_len] + [0]*(target_len - len(some_list))
+
+def flatten(x):
+    if isinstance(x, collections.Iterable):
+        return [a for i in x for a in flatten(i)]
+    else:
+        return [x]
 
 
 
@@ -82,6 +88,8 @@ Lights()
 	.on()
 	.off()
 	.rotate()
+	.add_color(name, [r,g,b])
+	.set_brightness([0-1] * 12)
 """
 class Lights():
 	def __init__(self, pixels=12):
@@ -92,6 +100,7 @@ class Lights():
 		self.power_on = True
 		self.power = gpiozero.LED(5)
 		self.power.on()
+		self.brightness = [1] * 12
 
 		self.colors = {
 			0			: [ 0   ,   0 , 0   ],
@@ -106,24 +115,26 @@ class Lights():
 			"white"		: [ 255 , 255 , 255 ]
 		}
 
-
 	def set(self, lights_arr):
+		if len(lights_arr) == 4 * self.pixels:
+			self.data = lights_arr
+			return
+		
 		self.lights_arr = resize(lights_arr, self.pixels)
 		self.data = [0] * 4 * 12
 		for i in range(len(lights_arr)):
 			color = lights_arr[i]
-			self.data[i * 4 + 1] = self.colors[color][0]
-			self.data[i * 4 + 2] = self.colors[color][1]
-			self.data[i * 4 + 3] = self.colors[color][2]
+			self.data[i * 4 + 1] = float(self.colors[color][0]) * float(self.brightness[i])
+			self.data[i * 4 + 2] = float(self.colors[color][1]) * float(self.brightness[i])
+			self.data[i * 4 + 3] = float(self.colors[color][2]) * float(self.brightness[i])
 		# log("led", "lights: [" + ",".join(str(_) for _ in self.data) + "]")
-
 
 	def rotate(self, n=1):
 		# log("led", "rotate")
 		self.lights_arr = self.lights_arr[n:]+self.lights_arr[:n]
+		self.brightness = self.brightness[n:]+self.brightness[:n]
 		self.set(self.lights_arr)
 		self.on()
-
 
 	def on(self):
 		# log("led", "on")
@@ -135,12 +146,20 @@ class Lights():
 			self.dev.set_pixel(i, int(self.data[4*i + 1]), int(self.data[4*i + 2]), int(self.data[4*i + 3]))
 		self.dev.show()
 
-
 	def off(self):
 		self.power.off()
 		self.power_on = False
 		# log("led", "off")
 
+	def set_brightness(self, arr):
+		try:
+			if len(arr) != 12:
+				arr = [1] * 12
+		except Exception:
+			arr = [1] * 12
+		self.brightness = arr
+		self.set(self.lights_arr)
+		self.on()
 
 	def add_color(self, name, code):
 		self.colors[name] = code

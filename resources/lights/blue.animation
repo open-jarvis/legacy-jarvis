@@ -1,0 +1,23 @@
+[colors]
+main = 0,0,255
+secondary = 0,255,0
+
+[animation]
+type = gradient
+width = 1
+spread = 1
+sleep_duration = 0.05
+
+[on]
+animation = fade
+duration = 0.5
+
+[off]
+animation = fade
+duration = 0.5
+
+[speak]
+spread = 999
+
+[endspeak]
+spread = 1
