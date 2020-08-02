@@ -20,7 +20,6 @@ BASECOLOR = [255, 255, 255]
 OPACITY = 0.5
 
 
-
 def handler(client, userdata, message):
 	global lights, COLOR, BASECOLOR, OPACITY, MODE
 	data = message.payload.decode()
