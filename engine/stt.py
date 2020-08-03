@@ -48,6 +48,7 @@ mqtt.publish("jarvis/stt", "started")
 
 
 try:
+	start = time.time()
 	speech = LiveSpeech(
 		verbose=True,
 		sampling_rate=16000,
@@ -58,7 +59,11 @@ try:
 		lm="/home/pi/jarvis/resources/stt/german.lm.bin",
 		dict="/home/pi/jarvis/resources/stt/german.commands.dict"
 	)
+	
 	phrases = []
+	end = time.time()
+	helper.log("stt", "took {}s to start stt engine".format(end-start))
+
 	for phrase in speech:
 		phrases.append((time.time(), phrase))
 		helper.log("stt", "recorded phrase: '" + phrase + "'")

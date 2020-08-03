@@ -9,7 +9,7 @@
 ## output: jarvis/hotword -> (detected|started|stopped|error|direction:[degrees])
 
 
-import signal, os, sys, time, collections, configparser, argparse
+import signal, os, sys, time, collections, configparser, argparse, traceback
 import numpy as np
 
 import lib.helper as helper
@@ -40,8 +40,8 @@ mqtt = helper.MQTT(client_id="hotword.py")
 
 
 if "--no-doa" in sys.argv:
-	helper.log("hotw", "Not using Direction of Arrival")
-	helper.log("hotw", "This feature hasn't been implemented yet...")
+	helper.log("hotword", "Not using Direction of Arrival")
+	helper.log("hotword", "This feature hasn't been implemented yet...")
 
 	interrupted = False
 
@@ -68,7 +68,7 @@ if "--no-doa" in sys.argv:
 
 	if not os.path.isfile(MODEL_PATH):
 		mqtt.publish("jarvis/hotword", "error")
-		helper.log("hotw", "model doesn't exist at {}".format(MODEL_PATH))
+		helper.log("hotword", "model doesn't exist at {}".format(MODEL_PATH))
 		sys.exit(-1)
 
 
@@ -90,7 +90,7 @@ else:
 	history = collections.deque(maxlen=int(DOA_FRAMES / KWS_FRAMES))
 
 	try:
-		with MicArray(RATE, CHANNELS, RATE * KWS_FRAMES / 1000)  as mic:
+		with MicArray(RATE, CHANNELS, RATE * KWS_FRAMES / 1000) as mic:
 			for chunk in mic.read_chunks():
 				history.append(chunk)
 				ans = detector.RunDetection(chunk[0::CHANNELS].tostring())
@@ -99,6 +99,12 @@ else:
 					direction = mic.get_direction(frames)
 					mqtt.publish("jarvis/hotword", "direction:" + str(direction))
 					mqtt.publish("jarvis/hotword", "detected")
-
+					break
+			helper.log("hotword", "detected hotword, freeing mic resources for stt")
 	except KeyboardInterrupt:
-		pass
+		exit(1)
+	except Exception as e:
+		traceback.print_exc()
+		mqtt.publish("jarvis/hotword", "error")
+		helper.log("hotword", "mic already in use")
+		exit(1)
