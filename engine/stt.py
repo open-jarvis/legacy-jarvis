@@ -6,12 +6,24 @@
 ## stt.py uses https://cmusphinx.github.io/
 
 ## input: jarvis/hotword -> detected
+## raw_input: jarvis/internal/mic_buffer_stream -> raw bytes mic buffer stream
 ## output: jarvis/stt -> (command:[words]|started|stopped|error)
 
 
-import os, sys, time, traceback
-import lib.helper as helper 
-from pocketsphinx import LiveSpeech
+import os, sys, time, traceback, base64, argparse, configparser
+import lib.helper as helper
+from pocketsphinx.pocketsphinx import *
+from sphinxbase.sphinxbase import *
+
+
+parser = argparse.ArgumentParser(description="Speech-To-Text engine using CMUSphinx and PocketSphinx\nWhen a hotword is detected, it starts to transcribe text", formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
+args = parser.parse_args()
+
+config = configparser.ConfigParser()
+config.read(args.config)
+config = config["stt"]
+
 
 if "--test" in sys.argv:
 	import pyaudio
@@ -35,44 +47,52 @@ def hotword_callback(client, userdata, message):
 def phrase_callback(phrase):
 	mqtt.publish("jarvis/stt", "command:" + str(phrase))
 
+def mic_buffer_callback(client, userdata, message):
+	global decoder, utt_started
+	try:
+		if message.payload.decode() == "end":
+			decoder.end_utt()
+			helper.log("stt", "stopping utterance")
+			utt_started = False
+			process_stt()
+		else:
+			if not utt_started:
+				decoder.start_utt()
+				helper.log("stt", "starting utterance")
+				utt_started = True
+			chunk = base64.b64decode(message.payload.decode())
+			decoder.process_raw(chunk, False, False)
+	except Exception:
+		print("exception:")
+		traceback.print_exc()
 
-record_phrases = False
+def process_stt():
+	global decoder
+	print("Best hypothesis: {}".format([seg.word for seg in decoder.seg()]))
+
 
 mqtt = helper.MQTT(client_id="stt.py")
 mqtt.on_message(hotword_callback)
 mqtt.subscribe("jarvis/hotword")
+
+mqtt2 = helper.MQTT(client_id="stt.py:mic_buffer")
+mqtt2.on_message(mic_buffer_callback)
+mqtt2.subscribe("jarvis/internal/mic_buffer_stream")
 
 
 helper.log("stt", "starting pocketsphinx passively")
 mqtt.publish("jarvis/stt", "started")
 
 
-try:
-	start = time.time()
-	speech = LiveSpeech(
-		verbose=True,
-		sampling_rate=16000,
-		buffer_size=2048,
-		no_search=False,
-		full_utt=False,
-		hmm="/home/pi/jarvis/resources/stt/acoustic_model/",
-		lm="/home/pi/jarvis/resources/stt/german.lm.bin",
-		dict="/home/pi/jarvis/resources/stt/german.commands.dict"
-	)
-	
-	phrases = []
-	end = time.time()
-	helper.log("stt", "took {}s to start stt engine".format(end-start))
+utt_started = False
 
-	for phrase in speech:
-		phrases.append((time.time(), phrase))
-		helper.log("stt", "recorded phrase: '" + phrase + "'")
-		if record_phrases:
-			phrase_callback(phrase)
-except Exception:
-	traceback.print_exc()
-	mqtt.publish("jarvis/stt", "error")
-	exit(1)
+config = Decoder.default_config()
+config.set_string('-hmm', config["acoustic_model"])
+config.set_string('-lm', config["language_model"])
+config.set_string('-dict', config["dictionary"])
+decoder = Decoder(config)
 
+while True:
+	time.sleep(1)
 
 mqtt.publish("jarvis/stt", "stopped")
