@@ -10,7 +10,7 @@ import time, random, string, gpiozero, collections
 
 ###################### HELPER FUNCTIONS ######################
 def log(type, msg):
-	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (5-len(type))) + str(msg))
+	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
 	print(logstr)
 
 def resize(some_list, target_len):

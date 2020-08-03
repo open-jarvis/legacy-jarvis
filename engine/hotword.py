@@ -6,7 +6,7 @@
 ## hotword.py uses https://snowboy.kitt.ai/
 
 ## input: nothing
-## output: jarvis/hotword -> (detected|started|stopped|error)
+## output: jarvis/hotword -> (detected|started|stopped|error|direction:[degrees])
 
 
 import signal, os, sys, time, collections, configparser, argparse
@@ -97,9 +97,8 @@ else:
 				if ans > 0:
 					frames = np.concatenate(history)
 					direction = mic.get_direction(frames)
+					mqtt.publish("jarvis/hotword", "direction:" + str(direction))
 					mqtt.publish("jarvis/hotword", "detected")
-					mqtt.publish("jarvis/lights", "direction:" + str(direction))
-					mqtt.publish("jarvis/lights", "on")
 
 	except KeyboardInterrupt:
 		pass
