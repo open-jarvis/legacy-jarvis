@@ -2,12 +2,13 @@
 # Copyright (c) 2020 by Philipp Scheer. All Rights Reserved.
 #
 
-## lights.py - listenes on the mic and controls the leds (calculates doa but has other functionalities too)
+## lights.py - controls the leds (calculates doa but has other functionalities too)
 
 ## input: jarvis/lights -> (on|off|direction:[degrees])
 ## output: nothing
 
 
+## import global packages
 import lib.helper as helper
 from lib.doa.gcc_phat import gcc_phat
 from lib.doa.mic_array import MicArray
@@ -15,12 +16,19 @@ import numpy as np
 import time, sys, collections, argparse, configparser, traceback, math
 
 
+# this function gets called whenever the jarvis/lights mqtt listener receives a message
 def handler(client, userdata, message):
 	global lights, animation, direction, position
-	data = message.payload.decode()
 
+	# read the mqtt data
+	data = message.payload.decode()
+	
 	try:
+		# if a user wants to turn on the lights
 		if data == "on":
+			# TODO: add different animations
+
+			# calulate gradients for the leds
 			led_circle = ["main"]
 			for i in range(len(GRADIENTS)):
 				lights.add_color("gradient" + str(i), GRADIENTS[i])
@@ -34,22 +42,30 @@ def handler(client, userdata, message):
 			for i in range(12 - len(GRADIENTS)*2 - 2):
 				led_circle.append("main")
 
+			# set the leds and rotate to match the destination of arrival
 			lights.set(led_circle)
 			lights.rotate(-position + SPREAD)
 			lights.on()
 
+			# print a logging message
 			helper.log("lights", "turning on led circle at degree:position {}:{}".format(direction, position))
 
+		# if a user wants to turn off the lights
 		if data == "off":
 			lights.off()
 
+		# if the user wants to set a direction of arrival
 		if data.startswith("direction:"):
+			# calculate the position (number of leds) when a direction (degrees) is given
 			direction = int(float(data.split(":")[1]))
 			position = int((direction + 15) % 360 / 30) % 12
 	except Exception as e:
+		# print an exception and log the error
 		traceback.print_exc()
+		helper.log("lights", "Failed to set lights: " + traceback.format_exc())
 	
 
+# this function calculates the led 
 def calculate_led_circle(main, secondary, gradients, direction):
 	led_data = [[0] + _ for _ in gradients] + [0] + secondary + [[0] + _ for _ in gradients[::-1]] + ([0] + main) * (12 - 2*len(gradients) - 1)
 	return helper.flatten(led_data)

@@ -2,13 +2,13 @@
 # Copyright (c) 2020 by Philipp Scheer. All Rights Reserved.
 #
 
-## helper.py - a helper library to simplify tasks like logging, mqtt, etc...
 
+## import global packages
 import paho.mqtt.client as mqtt
 import time, random, string, gpiozero, collections
 
 
-###################### HELPER FUNCTIONS ######################
+# logs a message with given prefix, also accepts an argument to control (disable) logging to file
 def log(type, msg, do_not_log=False):
 	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
 	print(logstr)
@@ -16,9 +16,13 @@ def log(type, msg, do_not_log=False):
 		with open("/home/pi/jarvis/log/jarvis.log", "a+") as logf:
 			logf.write(logstr + "\n")
 
+
+# resizes an array to given length
 def resize(some_list, target_len):
 	return some_list[:target_len] + [0]*(target_len - len(some_list))
 
+
+# flattens a 2d array
 def flatten(x):
     if isinstance(x, collections.Iterable):
         return [a for i in x for a in flatten(i)]
@@ -27,14 +31,12 @@ def flatten(x):
 
 
 
-###################### HELPER CLASSES ######################
-"""
-MQTT(host=127.0.0.1, port=1883, client_id=[random])
-	.on_connect(callback[client, userdata, flags, rc])
-	.on_message(callback[client, userdata, message])
-	.publish(topic, payload)
-	.subscribe(topic)
-"""
+
+# MQTT(host=127.0.0.1, port=1883, client_id=[random])
+# 	.on_connect(callback[client, userdata, flags, rc])
+# 	.on_message(callback[client, userdata, message])
+# 	.publish(topic, payload)
+# 	.subscribe(topic)
 class MQTT():
 	def __init__(self, host="127.0.0.1", port=1883, client_id=None):
 		self.host = host
@@ -52,49 +54,32 @@ class MQTT():
 		log("mqtt", "starting event loop")
 		self.client.loop_start()
 
-
-	"""
-	on_connect(client, userdata, flags, rc)
-	"""
 	def on_connect(self, fn):
 		log("mqtt", "adding 'on_connect' callback")
 		self.client.on_connect = fn
 
-
-	"""
-	on_message(client, userdata, message)
-	"""
 	def on_message(self, fn):
 		log("mqtt", "adding 'on_message' callback")
 		self.client.on_message = fn
-
 
 	def publish(self, topic, payload, disable_log=False):
 		if not disable_log:
 			log("mqtt", "publishing message: {}:{} -> {} -> '{}'".format(str(self.host), str(self.port), str(topic), str(payload)))
 		return self.client.publish(topic, payload)
 
-
-	"""
-	arguments:
-		callback_function	:	a function with fn(client, userdata, message)
-		topic				:	a mqtt topic (for example: test/log)
-		host				:	subscribe to messages on that host
-	"""
 	def subscribe(self, topic):
 		log("mqtt", "subscribing to {}:{} {}".format(str(self.host), str(self.port), str(topic)))
 		return self.client.subscribe(topic)
 
 
-"""
-Lights()
-	.set( [0, "black", "off", "blue", "green", "turquoise", "red", "violet", "yellow", "white", 0, 0] )  - len(12)
-	.on()
-	.off()
-	.rotate()
-	.add_color(name, [r,g,b])
-	.set_brightness([0-1] * 12)
-"""
+
+# Lights()
+# 	.set( [0, "black", "off", "blue", "green", "turquoise", "red", "violet", "yellow", "white", 0, 0] )  - len(12)
+# 	.on()
+# 	.off()
+# 	.rotate()
+# 	.add_color(name, [r,g,b])
+# 	.set_brightness([0-1] * 12)
 class Lights():
 	def __init__(self, pixels=12):
 		self.pixels = 12
@@ -170,11 +155,9 @@ class Lights():
 
 
 
-###################### APA102 LIBRARY ######################
-"""
-from https://github.com/tinue/APA102_Pi
-This is the main driver module for APA102 LEDs
-"""
+# apa102 library
+# from https://github.com/tinue/APA102_Pi
+# This is the main driver module for APA102 LEDs
 import spidev
 from math import ceil
 
