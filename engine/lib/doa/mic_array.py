@@ -24,15 +24,17 @@ class MicArray(object):
 		self.sample_rate = rate
 		self.chunk_size = chunk_size if chunk_size else rate / 100
 
-		device_index = None
-		for i in range(self.pyaudio_instance.get_device_count()):
-			dev = self.pyaudio_instance.get_device_info_by_index(i)
-			name = dev['name'].encode('utf-8')
-			print(i, name, dev['maxInputChannels'], dev['maxOutputChannels'])
-			if dev['maxInputChannels'] == self.channels:
-				print('Use {}'.format(name))
-				device_index = i
-				break
+		device_index = 0
+
+		# device_index = None
+		# for i in range(self.pyaudio_instance.get_device_count()):
+		# 	dev = self.pyaudio_instance.get_device_info_by_index(i)
+		# 	name = dev['name'].encode('utf-8')
+		# 	print(i, name, dev['maxInputChannels'], dev['maxOutputChannels'])
+		# 	if dev['maxInputChannels'] == self.channels:
+		# 		print('Use {}'.format(name))
+		# 		device_index = i
+		# 		break
 
 		if device_index is None:
 			raise Exception('can not find input device with {} channel(s)'.format(self.channels))

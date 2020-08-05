@@ -4,7 +4,7 @@
 
 ## lights.py - listenes on the mic and controls the leds (calculates doa but has other functionalities too)
 
-## input: jarvis/hotword -> (detected|direction:[degrees])
+## input: jarvis/lights -> (on|off|direction:[degrees])
 ## output: nothing
 
 
@@ -20,7 +20,7 @@ def handler(client, userdata, message):
 	data = message.payload.decode()
 
 	try:
-		if data == "detected":
+		if data == "on":
 			led_circle = ["main"]
 			for i in range(len(GRADIENTS)):
 				lights.add_color("gradient" + str(i), GRADIENTS[i])
@@ -93,8 +93,7 @@ lights.add_color("secondary", SECONDARY_COLOR)
 
 mqtt = helper.MQTT(client_id="lights.py")
 mqtt.on_message(handler)
-mqtt.subscribe("jarvis/hotword")
-
+mqtt.subscribe("jarvis/lights")
 
 while True:	# main loop
 	time.sleep(1)

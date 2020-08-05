@@ -9,9 +9,12 @@ import time, random, string, gpiozero, collections
 
 
 ###################### HELPER FUNCTIONS ######################
-def log(type, msg):
+def log(type, msg, do_not_log=False):
 	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
 	print(logstr)
+	if not do_not_log:
+		with open("/home/pi/jarvis/log/jarvis.log", "a+") as logf:
+			logf.write(logstr + "\n")
 
 def resize(some_list, target_len):
 	return some_list[:target_len] + [0]*(target_len - len(some_list))
@@ -66,8 +69,9 @@ class MQTT():
 		self.client.on_message = fn
 
 
-	def publish(self, topic, payload):
-		log("mqtt", "publishing message: {}:{} -> {} -> '{}'".format(str(self.host), str(self.port), str(topic), str(payload)))
+	def publish(self, topic, payload, disable_log=False):
+		if not disable_log:
+			log("mqtt", "publishing message: {}:{} -> {} -> '{}'".format(str(self.host), str(self.port), str(topic), str(payload)))
 		return self.client.publish(topic, payload)
 
 

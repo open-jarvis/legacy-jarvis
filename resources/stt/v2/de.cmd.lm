@@ -1,0 +1,57 @@
+Language model created by QuickLM on Wed Aug  5 07:00:17 EDT 2020
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 8 sentences and 10 words
+
+\data\
+ngram 1=10
+ngram 2=16
+ngram 3=8
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.6812 DAS -0.2218
+-1.6812 DER -0.2218
+-1.6812 DIE -0.2218
+-1.6812 MORGEN -0.2218
+-1.6812 TEST -0.2218
+-1.6812 WETTER -0.2218
+-1.6812 WIE -0.2218
+-1.6812 WIRD -0.2218
+
+\2-grams:
+-1.2041 <s> DAS 0.0000
+-1.2041 <s> DER 0.0000
+-1.2041 <s> DIE 0.0000
+-1.2041 <s> MORGEN 0.0000
+-1.2041 <s> TEST 0.0000
+-1.2041 <s> WETTER 0.0000
+-1.2041 <s> WIE 0.0000
+-1.2041 <s> WIRD 0.0000
+-0.3010 DAS </s> -0.3010
+-0.3010 DER </s> -0.3010
+-0.3010 DIE </s> -0.3010
+-0.3010 MORGEN </s> -0.3010
+-0.3010 TEST </s> -0.3010
+-0.3010 WETTER </s> -0.3010
+-0.3010 WIE </s> -0.3010
+-0.3010 WIRD </s> -0.3010
+
+\3-grams:
+-0.3010 <s> DAS </s>
+-0.3010 <s> DER </s>
+-0.3010 <s> DIE </s>
+-0.3010 <s> MORGEN </s>
+-0.3010 <s> TEST </s>
+-0.3010 <s> WETTER </s>
+-0.3010 <s> WIE </s>
+-0.3010 <s> WIRD </s>
+
+\end\
