@@ -13,7 +13,7 @@ def log(type, msg, do_not_log=False):
 	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
 	print(logstr)
 	if not do_not_log:
-		with open("/home/pi/jarvis/jarvis.log", "a+") as logf:
+		with open("/home/pi/jarvis/log/jarvis.log", "a+") as logf:
 			logf.write(logstr + "\n")
 
 def resize(some_list, target_len):

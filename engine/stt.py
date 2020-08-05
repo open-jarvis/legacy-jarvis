@@ -10,7 +10,7 @@
 ## output: jarvis/stt -> (command:[words]|started|stopped|error)
 
 
-import os, sys, time, traceback, base64, argparse, configparser
+import os, sys, time, traceback, base64, argparse, configparser, re
 import lib.helper as helper
 from pocketsphinx.pocketsphinx import *
 from sphinxbase.sphinxbase import *
@@ -61,14 +61,22 @@ def mic_buffer_callback(client, userdata, message):
 				helper.log("stt", "starting utterance")
 				utt_started = True
 			chunk = base64.b64decode(message.payload.decode())
-			decoder.process_raw(chunk, False, False)
+			decoder.process_raw(chunk[1::4], False, False)
 	except Exception:
 		print("exception:")
 		traceback.print_exc()
 
 def process_stt():
 	global decoder
-	print("Best hypothesis: {}".format([seg.word for seg in decoder.seg()]))
+	hypothesis_raw = " ".join([seg.word.lower() for seg in decoder.seg()])
+	hypothesis = clean_tags(hypothesis_raw).strip()
+	print("-> best hypothesis: {}".format(hypothesis_raw))
+	mqtt.publish("jarvis/stt", "command:" + hypothesis)
+
+def clean_tags(raw_txt):
+	cleanr = re.compile('<.*?>')
+	cleantext = re.sub(cleanr, '', raw_txt)
+	return cleantext
 
 
 mqtt = helper.MQTT(client_id="stt.py")
@@ -80,19 +88,22 @@ mqtt2.on_message(mic_buffer_callback)
 mqtt2.subscribe("jarvis/internal/mic_buffer_stream")
 
 
+utt_started = False
+
+decoder_config = Decoder.default_config()
+decoder_config.set_string('-hmm', config["acoustic_model"])
+decoder_config.set_string('-lm', config["language_model"])
+decoder_config.set_string('-dict', config["dictionary"])
+decoder_config.set_string('-rawlogdir', "/home/pi/jarvis/log/stt")
+decoder = Decoder(decoder_config)
+
 helper.log("stt", "starting pocketsphinx passively")
 mqtt.publish("jarvis/stt", "started")
 
 
-utt_started = False
-
-config = Decoder.default_config()
-config.set_string('-hmm', config["acoustic_model"])
-config.set_string('-lm', config["language_model"])
-config.set_string('-dict', config["dictionary"])
-decoder = Decoder(config)
-
-while True:
-	time.sleep(1)
-
-mqtt.publish("jarvis/stt", "stopped")
+try:
+	while True:
+		time.sleep(1)
+except KeyboardInterrupt:
+	mqtt.publish("jarvis/stt", "stopped")
+	exit(0)

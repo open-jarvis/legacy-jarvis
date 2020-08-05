@@ -87,10 +87,10 @@ if "--no-doa" in sys.argv:
 	detector.terminate()
 else:
 	detector = snowboydetect.SnowboyDetect(RESOURCE_PATH.encode(), MODEL_PATH.encode())
-	detector.SetAudioGain(config["gain"])
+	detector.SetAudioGain(float(config["gain"]))
 	detector.SetSensitivity(SENSITIVITY.encode())
 
-	vad = webrtcvad.Vad(config["vad_sensitivity"])
+	vad = webrtcvad.Vad(int(config["vad_sensitivity"]))
 	speech_count = 0
 	speech_detected = 0
 	currently_speaking = False
@@ -120,14 +120,14 @@ else:
 						mqtt.publish("jarvis/internal/mic_buffer_stream", "end")	## stop sending data to stt.py
 						mqtt.publish("jarvis/lights", "off")
 						hotword_detected = False
-						os.system("sox -r 16000 -c 1 -b 16 -e signed-integer -t raw {} -t wav {} ; rm {}".format(raw_file_name, raw_file_name.replace(".raw", ".wav"), raw_file_name))
+						# os.system("sox -r 16000 -c 1 -b 16 -e signed-integer -t raw {} -t wav {} ; rm {}".format(raw_file_name, raw_file_name.replace(".raw", ".wav"), raw_file_name))
 					currently_speaking = False
 
 				if hotword_detected and currently_speaking:							# if the user said the hotword and speaks
 					mqtt.publish(	"jarvis/internal/mic_buffer_stream",			## send data to stt.py 
-									base64.b64encode(chunk[0::1]), 
-									disable_log=True	)
-					with open(raw_file_name, "ab") as wavf:							## record the voice
+									base64.b64encode(chunk), 						## !!! this data is being sent to stt.py
+									disable_log=True	)							## disable logging because of flooding terminal and logfiles
+					with open("/home/pi/jarvis/log/hotword/" + raw_file_name, "ab") as wavf:			## record the voice
 						wavf.write(chunk)
 
 				if ans > 0:
