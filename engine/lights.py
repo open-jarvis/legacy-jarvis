@@ -63,13 +63,9 @@ def handler(client, userdata, message):
 		# print an exception and log the error
 		traceback.print_exc()
 		helper.log("lights", "Failed to set lights: " + traceback.format_exc())
-	
 
-# this function calculates the led 
-def calculate_led_circle(main, secondary, gradients, direction):
-	led_data = [[0] + _ for _ in gradients] + [0] + secondary + [[0] + _ for _ in gradients[::-1]] + ([0] + main) * (12 - 2*len(gradients) - 1)
-	return helper.flatten(led_data)
 
+# calulates gradient for for a given main color, secondary color and a integer spread
 def calculate_gradients(main, secondary, spread):
 	gradients = [ [0,0,0] ] * spread
 	for i in range(spread):
@@ -81,17 +77,23 @@ def calculate_gradients(main, secondary, spread):
 	return gradients
 
 
+# initialize an argument parser, add a description and arguments
 parser = argparse.ArgumentParser(description="Jarvis Lights API for ReSpeaker 4-Mic Array\nControls the lights and animations", formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
 args = parser.parse_args()
 
+
+# get the config file from the argparser and read it
 config = configparser.ConfigParser()
 config.read(args.config)
 
+
+# read the animation config from the above config file
 animation = configparser.ConfigParser()
 animation.read(config["lights"]["animation"])
 
 
+# define global final variables
 SLEEP_DURATION	= float(animation["animation"]["sleep_duration"])
 SPREAD			= int(animation["animation"]["spread"])
 WIDTH			= int(animation["animation"]["width"])
@@ -103,13 +105,18 @@ direction		= 0
 position		= 0
 
 
+# initialize the lights
 lights = helper.Lights()
 lights.add_color("main", MAIN_COLOR)
 lights.add_color("secondary", SECONDARY_COLOR)
 
+
+# initialize a mqtt client and add a callback
 mqtt = helper.MQTT(client_id="lights.py")
 mqtt.on_message(handler)
 mqtt.subscribe("jarvis/lights")
 
-while True:	# main loop
+
+# mainloop
+while True:
 	time.sleep(1)
