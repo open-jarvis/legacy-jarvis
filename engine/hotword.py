@@ -87,10 +87,10 @@ if "--no-doa" in sys.argv:
 	detector.terminate()
 else:
 	detector = snowboydetect.SnowboyDetect(RESOURCE_PATH.encode(), MODEL_PATH.encode())
-	detector.SetAudioGain(config["gain"])
+	detector.SetAudioGain(float(config["gain"]))
 	detector.SetSensitivity(SENSITIVITY.encode())
 
-	vad = webrtcvad.Vad(config["vad_sensitivity"])
+	vad = webrtcvad.Vad(int(config["vad_sensitivity"]))
 	speech_count = 0
 	speech_detected = 0
 	currently_speaking = False
