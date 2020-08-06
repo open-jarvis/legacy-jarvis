@@ -2,7 +2,16 @@
 # Copyright (c) 2020 by Philipp Scheer. All Rights Reserved.
 #
 
-## lights.py - controls the leds (calculates doa but has other functionalities too)
+
+# usage: lights.py [-h] [--config CONFIG]
+# 
+# Jarvis Lights API for ReSpeaker 4-Mic Array
+# Controls the lights and animations
+# 
+# optional arguments:
+#   -h, --help       show this help message and exit
+#   --config CONFIG  Path to jarvis configuration file
+
 
 ## input: jarvis/lights -> (on|off|direction:[degrees])
 ## output: nothing
