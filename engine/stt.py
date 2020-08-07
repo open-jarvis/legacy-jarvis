@@ -25,18 +25,6 @@ from pocketsphinx.pocketsphinx import *
 from sphinxbase.sphinxbase import *
 
 
-## add a description and parse arguments
-parser = argparse.ArgumentParser(description="Speech-To-Text engine using CMUSphinx and PocketSphinx\nWhen a hotword is detected, it starts to transcribe text", formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
-args = parser.parse_args()
-
-
-## get the config file from argparse and read it
-config = configparser.ConfigParser()
-config.read(args.config)
-config = config["stt"]
-
-
 ## TODO: obsolete?
 ## 		 might be, but it's implementing the official API of mqtt:jarvis/hotword
 ## this function is being called when hotword.py sends a message
@@ -96,6 +84,18 @@ def clean_tags(raw_txt):
 	cleanr = re.compile('<.*?>')
 	cleantext = re.sub(cleanr, '', raw_txt)
 	return cleantext
+
+
+# add a description and parse arguments
+parser = argparse.ArgumentParser(description="Speech-To-Text engine using CMUSphinx and PocketSphinx\nWhen a hotword is detected, it starts to transcribe text", formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
+args = parser.parse_args()
+
+
+# get the config file from argparse and read it
+config = configparser.ConfigParser()
+config.read(args.config)
+config = config["stt"]
 
 
 # initialize a mqtt client that listens to the jarvis/hotword channel

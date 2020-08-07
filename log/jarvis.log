@@ -1,0 +1,507 @@
+[08/05/20 12:58:42] [mqtt]     creating client 'hotword.py'
+[08/05/20 12:58:42] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 12:58:42] [mqtt]     starting event loop
+[08/05/20 12:58:46] [mqtt]     creating client 'stt.py'
+[08/05/20 12:58:46] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 12:58:46] [mqtt]     starting event loop
+[08/05/20 12:58:46] [mqtt]     adding 'on_message' callback
+[08/05/20 12:58:46] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 12:58:46] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 12:58:46] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 12:58:46] [mqtt]     starting event loop
+[08/05/20 12:58:46] [mqtt]     adding 'on_message' callback
+[08/05/20 12:58:46] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 12:58:55] [stt]      starting pocketsphinx passively
+[08/05/20 12:58:55] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 12:58:59] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 12:59:04] [mqtt]     creating client 'hotword.py'
+[08/05/20 12:59:04] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 12:59:04] [mqtt]     starting event loop
+[08/05/20 12:59:08] [mqtt]     creating client 'stt.py'
+[08/05/20 12:59:08] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 12:59:08] [mqtt]     starting event loop
+[08/05/20 12:59:08] [mqtt]     adding 'on_message' callback
+[08/05/20 12:59:08] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 12:59:08] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 12:59:08] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 12:59:08] [mqtt]     starting event loop
+[08/05/20 12:59:08] [mqtt]     adding 'on_message' callback
+[08/05/20 12:59:08] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 12:59:16] [stt]      starting pocketsphinx passively
+[08/05/20 12:59:16] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 12:59:33] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 12:59:33] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:358.138343808492'
+[08/05/20 12:59:33] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 12:59:33] [hotword]  start transmitting speech
+[08/05/20 12:59:33] [stt]      starting utterance
+[08/05/20 12:59:35] [hotword]  stop transmitting speech
+[08/05/20 12:59:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 12:59:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 12:59:35] [stt]      stopping utterance
+[08/05/20 12:59:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 13:26:43] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:26:44] [mqtt]     creating client 'stt.py'
+[08/05/20 13:26:44] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:26:44] [mqtt]     starting event loop
+[08/05/20 13:26:44] [mqtt]     adding 'on_message' callback
+[08/05/20 13:26:44] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:26:44] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:26:44] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:26:44] [mqtt]     starting event loop
+[08/05/20 13:26:44] [mqtt]     adding 'on_message' callback
+[08/05/20 13:26:44] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:26:48] [mqtt]     creating client 'hotword.py'
+[08/05/20 13:26:48] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:26:48] [mqtt]     starting event loop
+[08/05/20 13:26:53] [stt]      starting pocketsphinx passively
+[08/05/20 13:26:53] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:26:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:26:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:26:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:26:58] [hotword]  start transmitting speech
+[08/05/20 13:26:58] [stt]      starting utterance
+[08/05/20 13:27:00] [hotword]  stop transmitting speech
+[08/05/20 13:27:00] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 13:27:00] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 13:27:00] [stt]      stopping utterance
+[08/05/20 13:27:00] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 13:33:06] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:33:07] [mqtt]     creating client 'stt.py'
+[08/05/20 13:33:07] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:33:07] [mqtt]     starting event loop
+[08/05/20 13:33:07] [mqtt]     adding 'on_message' callback
+[08/05/20 13:33:07] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:33:07] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:33:07] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:33:07] [mqtt]     starting event loop
+[08/05/20 13:33:07] [mqtt]     adding 'on_message' callback
+[08/05/20 13:33:07] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:33:11] [mqtt]     creating client 'hotword.py'
+[08/05/20 13:33:11] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:33:11] [mqtt]     starting event loop
+[08/05/20 13:33:15] [stt]      starting pocketsphinx passively
+[08/05/20 13:33:15] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:41:12] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:41:13] [mqtt]     creating client 'stt.py'
+[08/05/20 13:41:13] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:41:13] [mqtt]     starting event loop
+[08/05/20 13:41:13] [mqtt]     adding 'on_message' callback
+[08/05/20 13:41:13] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:41:13] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:41:13] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:41:13] [mqtt]     starting event loop
+[08/05/20 13:41:13] [mqtt]     adding 'on_message' callback
+[08/05/20 13:41:13] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:41:17] [mqtt]     creating client 'hotword.py'
+[08/05/20 13:41:17] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:41:17] [mqtt]     starting event loop
+[08/05/20 13:41:21] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:41:21] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:41:21] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:41:21] [hotword]  start transmitting speech
+[08/05/20 13:41:21] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'error'
+[08/05/20 13:41:21] [hotword]  mic already in use
+[08/05/20 13:41:22] [stt]      starting pocketsphinx passively
+[08/05/20 13:41:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:41:43] [mqtt]     creating client 'hotword.py'
+[08/05/20 13:41:43] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:41:43] [mqtt]     starting event loop
+[08/05/20 13:41:56] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:41:56] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:41:56] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:41:56] [hotword]  start transmitting speech
+[08/05/20 13:41:56] [stt]      starting utterance
+[08/05/20 13:41:58] [hotword]  stop transmitting speech
+[08/05/20 13:41:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 13:41:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 13:41:58] [stt]      stopping utterance
+[08/05/20 13:41:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 13:43:27] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:43:29] [mqtt]     creating client 'stt.py'
+[08/05/20 13:43:29] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:43:29] [mqtt]     starting event loop
+[08/05/20 13:43:29] [mqtt]     adding 'on_message' callback
+[08/05/20 13:43:29] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:43:29] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:43:29] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:43:29] [mqtt]     starting event loop
+[08/05/20 13:43:29] [mqtt]     adding 'on_message' callback
+[08/05/20 13:43:29] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:43:33] [mqtt]     creating client 'hotword.py'
+[08/05/20 13:43:33] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:43:33] [mqtt]     starting event loop
+[08/05/20 13:43:37] [stt]      starting pocketsphinx passively
+[08/05/20 13:43:37] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:43:48] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:43:48] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:43:48] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:43:48] [hotword]  start transmitting speech
+[08/05/20 13:43:48] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'error'
+[08/05/20 13:43:48] [hotword]  mic already in use
+[08/05/20 13:45:47] [mqtt]     creating client 'hotword.py'
+[08/05/20 13:45:47] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:45:47] [mqtt]     starting event loop
+[08/05/20 13:45:48] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:45:49] [mqtt]     creating client 'stt.py'
+[08/05/20 13:45:49] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:45:49] [mqtt]     starting event loop
+[08/05/20 13:45:49] [mqtt]     adding 'on_message' callback
+[08/05/20 13:45:49] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:45:49] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:45:49] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:45:49] [mqtt]     starting event loop
+[08/05/20 13:45:49] [mqtt]     adding 'on_message' callback
+[08/05/20 13:45:49] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:45:53] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:45:53] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:45:53] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:45:53] [hotword]  start transmitting speech
+[08/05/20 13:45:54] [hotword]  stop transmitting speech
+[08/05/20 13:45:54] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 13:45:54] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 13:45:58] [stt]      starting pocketsphinx passively
+[08/05/20 13:45:58] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:48:14] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:48:15] [mqtt]     creating client 'stt.py'
+[08/05/20 13:48:15] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:48:15] [mqtt]     starting event loop
+[08/05/20 13:48:15] [mqtt]     adding 'on_message' callback
+[08/05/20 13:48:15] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:48:15] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:48:15] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:48:15] [mqtt]     starting event loop
+[08/05/20 13:48:15] [mqtt]     adding 'on_message' callback
+[08/05/20 13:48:15] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:48:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:48:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:48:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:48:22] [hotword]  start transmitting speech
+[08/05/20 13:48:23] [stt]      starting pocketsphinx passively
+[08/05/20 13:48:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:48:23] [stt]      starting utterance
+[08/05/20 13:48:24] [hotword]  stop transmitting speech
+[08/05/20 13:48:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 13:48:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 13:48:24] [stt]      stopping utterance
+[08/05/20 13:48:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 13:48:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:50:50] [mqtt]     creating client 'stt.py'
+[08/05/20 13:50:50] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:50:50] [mqtt]     starting event loop
+[08/05/20 13:50:50] [mqtt]     adding 'on_message' callback
+[08/05/20 13:50:50] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:50:50] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:50:50] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:50:50] [mqtt]     starting event loop
+[08/05/20 13:50:50] [mqtt]     adding 'on_message' callback
+[08/05/20 13:50:50] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:50:59] [stt]      starting pocketsphinx passively
+[08/05/20 13:50:59] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:51:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:51:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:51:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:51:02] [hotword]  start transmitting speech
+[08/05/20 13:51:02] [stt]      starting utterance
+[08/05/20 13:51:04] [hotword]  stop transmitting speech
+[08/05/20 13:51:04] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 13:51:04] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 13:51:04] [stt]      stopping utterance
+[08/05/20 13:51:04] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 13:52:07] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 13:52:08] [mqtt]     creating client 'stt.py'
+[08/05/20 13:52:08] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:52:08] [mqtt]     starting event loop
+[08/05/20 13:52:08] [mqtt]     adding 'on_message' callback
+[08/05/20 13:52:08] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 13:52:08] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 13:52:08] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 13:52:08] [mqtt]     starting event loop
+[08/05/20 13:52:08] [mqtt]     adding 'on_message' callback
+[08/05/20 13:52:08] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 13:52:17] [stt]      starting pocketsphinx passively
+[08/05/20 13:52:17] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 13:53:45] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 13:53:45] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 13:53:45] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 13:53:45] [hotword]  start transmitting speech
+[08/05/20 13:53:45] [stt]      starting utterance
+[08/05/20 13:53:47] [hotword]  stop transmitting speech
+[08/05/20 13:53:47] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 13:53:47] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 13:53:47] [stt]      stopping utterance
+[08/05/20 13:53:47] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 14:02:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 14:02:32] [mqtt]     creating client 'stt.py'
+[08/05/20 14:02:32] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 14:02:32] [mqtt]     starting event loop
+[08/05/20 14:02:32] [mqtt]     adding 'on_message' callback
+[08/05/20 14:02:32] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 14:02:32] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 14:02:32] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 14:02:32] [mqtt]     starting event loop
+[08/05/20 14:02:32] [mqtt]     adding 'on_message' callback
+[08/05/20 14:02:32] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 14:02:40] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:02:40] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 14:02:40] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:02:40] [hotword]  start transmitting speech
+[08/05/20 14:02:40] [stt]      starting pocketsphinx passively
+[08/05/20 14:02:40] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 14:02:40] [stt]      starting utterance
+[08/05/20 14:02:42] [hotword]  stop transmitting speech
+[08/05/20 14:02:42] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:02:42] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:02:42] [stt]      stopping utterance
+[08/05/20 14:02:42] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 14:19:46] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:19:46] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:358.138343808492'
+[08/05/20 14:19:46] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:19:46] [hotword]  start transmitting speech
+[08/05/20 14:19:46] [stt]      starting utterance
+[08/05/20 14:19:49] [hotword]  stop transmitting speech
+[08/05/20 14:19:49] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:19:49] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:19:50] [stt]      stopping utterance
+[08/05/20 14:19:50] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie wird das wetter morgen'
+[08/05/20 14:20:25] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:20:25] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:225.3036817968923'
+[08/05/20 14:20:25] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:20:25] [hotword]  start transmitting speech
+[08/05/20 14:20:25] [stt]      starting utterance
+[08/05/20 14:20:28] [hotword]  stop transmitting speech
+[08/05/20 14:20:28] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:20:28] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:20:28] [stt]      stopping utterance
+[08/05/20 14:20:28] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie wird das wetter morgen'
+[08/05/20 14:21:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:21:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:14.696318203107808'
+[08/05/20 14:21:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:21:09] [hotword]  start transmitting speech
+[08/05/20 14:21:09] [stt]      starting utterance
+[08/05/20 14:21:10] [hotword]  stop transmitting speech
+[08/05/20 14:21:10] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:21:10] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:21:10] [stt]      stopping utterance
+[08/05/20 14:21:10] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 14:21:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:21:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:14.696318203107808'
+[08/05/20 14:21:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:21:23] [hotword]  start transmitting speech
+[08/05/20 14:21:23] [stt]      starting utterance
+[08/05/20 14:21:24] [hotword]  stop transmitting speech
+[08/05/20 14:21:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:21:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:21:24] [stt]      stopping utterance
+[08/05/20 14:21:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 14:21:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:21:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:300.0'
+[08/05/20 14:21:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:21:31] [hotword]  start transmitting speech
+[08/05/20 14:21:31] [stt]      starting utterance
+[08/05/20 14:21:35] [hotword]  stop transmitting speech
+[08/05/20 14:21:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:21:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:21:35] [stt]      stopping utterance
+[08/05/20 14:21:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie wird das wetter morgen'
+[08/05/20 14:23:27] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:23:27] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 14:23:27] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:23:27] [hotword]  start transmitting speech
+[08/05/20 14:23:27] [stt]      starting utterance
+[08/05/20 14:23:28] [hotword]  stop transmitting speech
+[08/05/20 14:23:28] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:23:28] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:23:29] [stt]      stopping utterance
+[08/05/20 14:23:29] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:das'
+[08/05/20 14:23:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:23:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 14:23:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:23:35] [hotword]  start transmitting speech
+[08/05/20 14:23:35] [stt]      starting utterance
+[08/05/20 14:23:36] [hotword]  stop transmitting speech
+[08/05/20 14:23:36] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:23:36] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:23:36] [stt]      stopping utterance
+[08/05/20 14:23:36] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:test'
+[08/05/20 14:23:54] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'stopped'
+[08/05/20 14:23:55] [mqtt]     creating client 'stt.py'
+[08/05/20 14:23:55] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 14:23:55] [mqtt]     starting event loop
+[08/05/20 14:23:55] [mqtt]     adding 'on_message' callback
+[08/05/20 14:23:55] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 14:23:55] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 14:23:55] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 14:23:55] [mqtt]     starting event loop
+[08/05/20 14:23:55] [mqtt]     adding 'on_message' callback
+[08/05/20 14:23:55] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 14:23:58] [mqtt]     creating client 'hotword.py'
+[08/05/20 14:23:58] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 14:23:58] [mqtt]     starting event loop
+[08/05/20 14:24:03] [stt]      starting pocketsphinx passively
+[08/05/20 14:24:03] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 14:24:06] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:24:06] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 14:24:06] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:24:06] [hotword]  start transmitting speech
+[08/05/20 14:24:06] [stt]      starting utterance
+[08/05/20 14:24:09] [hotword]  stop transmitting speech
+[08/05/20 14:24:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:24:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:24:09] [stt]      stopping utterance
+[08/05/20 14:24:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 14:24:13] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 14:24:13] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:178.13834380849198'
+[08/05/20 14:24:13] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 14:24:13] [hotword]  start transmitting speech
+[08/05/20 14:24:13] [stt]      starting utterance
+[08/05/20 14:24:14] [hotword]  stop transmitting speech
+[08/05/20 14:24:14] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 14:24:14] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 14:24:15] [stt]      stopping utterance
+[08/05/20 14:24:15] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:test'
+[08/05/20 15:24:36] [mqtt]     creating client 'lights.py'
+[08/05/20 15:24:36] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 15:24:36] [mqtt]     starting event loop
+[08/05/20 15:24:36] [mqtt]     adding 'on_message' callback
+[08/05/20 15:24:36] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/lights
+[08/05/20 15:24:39] [mqtt]     creating client 'stt.py'
+[08/05/20 15:24:39] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 15:24:39] [mqtt]     starting event loop
+[08/05/20 15:24:39] [mqtt]     adding 'on_message' callback
+[08/05/20 15:24:39] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/hotword
+[08/05/20 15:24:39] [mqtt]     creating client 'stt.py:mic_buffer'
+[08/05/20 15:24:39] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 15:24:39] [mqtt]     starting event loop
+[08/05/20 15:24:39] [mqtt]     adding 'on_message' callback
+[08/05/20 15:24:39] [mqtt]     subscribing to 127.0.0.1:1883 jarvis/internal/mic_buffer_stream
+[08/05/20 15:24:47] [mqtt]     creating client 'hotword.py'
+[08/05/20 15:24:47] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 15:24:47] [mqtt]     starting event loop
+[08/05/20 15:24:50] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'error'
+[08/05/20 15:24:50] [hotword]  mic already in use
+[08/05/20 15:24:50] [stt]      starting pocketsphinx passively
+[08/05/20 15:24:50] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'started'
+[08/05/20 15:28:35] [mqtt]     creating client 'hotword.py'
+[08/05/20 15:28:35] [mqtt]     connecting to '127.0.0.1:1883'
+[08/05/20 15:28:35] [mqtt]     starting event loop
+[08/05/20 15:28:51] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:28:51] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:88.13834380849198'
+[08/05/20 15:28:51] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:28:51] [hotword]  start transmitting speech
+[08/05/20 15:28:51] [lights]   turning on led circle at degree:position 88:3
+[08/05/20 15:28:51] [stt]      starting utterance
+[08/05/20 15:28:52] [hotword]  stop transmitting speech
+[08/05/20 15:28:52] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:28:52] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:28:52] [stt]      stopping utterance
+[08/05/20 15:28:52] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 15:28:59] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:28:59] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:88.13834380849198'
+[08/05/20 15:28:59] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:28:59] [hotword]  start transmitting speech
+[08/05/20 15:28:59] [lights]   turning on led circle at degree:position 88:3
+[08/05/20 15:28:59] [stt]      starting utterance
+[08/05/20 15:29:02] [hotword]  stop transmitting speech
+[08/05/20 15:29:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:29:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:29:03] [stt]      stopping utterance
+[08/05/20 15:29:03] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:morgen wird das wetter morgen'
+[08/05/20 15:29:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:29:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:88.13834380849198'
+[08/05/20 15:29:09] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:29:09] [hotword]  start transmitting speech
+[08/05/20 15:29:09] [stt]      starting utterance
+[08/05/20 15:29:09] [lights]   turning on led circle at degree:position 88:3
+[08/05/20 15:29:12] [hotword]  stop transmitting speech
+[08/05/20 15:29:12] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:29:12] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:29:13] [stt]      stopping utterance
+[08/05/20 15:29:13] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie wird das wetter morgen'
+[08/05/20 15:29:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:29:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:88.13834380849198'
+[08/05/20 15:29:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:29:23] [hotword]  start transmitting speech
+[08/05/20 15:29:23] [stt]      starting utterance
+[08/05/20 15:29:23] [lights]   turning on led circle at degree:position 88:3
+[08/05/20 15:29:27] [hotword]  stop transmitting speech
+[08/05/20 15:29:27] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:29:27] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:29:28] [stt]      stopping utterance
+[08/05/20 15:29:28] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie wird das wetter morgen'
+[08/05/20 15:29:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:29:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:88.13834380849198'
+[08/05/20 15:29:31] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:29:31] [hotword]  start transmitting speech
+[08/05/20 15:29:31] [lights]   turning on led circle at degree:position 88:3
+[08/05/20 15:29:31] [stt]      starting utterance
+[08/05/20 15:29:34] [hotword]  stop transmitting speech
+[08/05/20 15:29:34] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:29:34] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:29:35] [stt]      stopping utterance
+[08/05/20 15:29:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie wird das wetter morgen'
+[08/05/20 15:29:38] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:29:38] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:82.35452175973677'
+[08/05/20 15:29:38] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:29:38] [hotword]  start transmitting speech
+[08/05/20 15:29:38] [stt]      starting utterance
+[08/05/20 15:29:38] [lights]   turning on led circle at degree:position 82:3
+[08/05/20 15:29:41] [hotword]  stop transmitting speech
+[08/05/20 15:29:41] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:29:41] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:29:42] [stt]      stopping utterance
+[08/05/20 15:29:42] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie das wetter morgen'
+[08/05/20 15:30:56] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:30:56] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:284.6963182031078'
+[08/05/20 15:30:56] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:30:56] [hotword]  start transmitting speech
+[08/05/20 15:30:56] [stt]      starting utterance
+[08/05/20 15:30:56] [lights]   turning on led circle at degree:position 284:9
+[08/05/20 15:30:57] [hotword]  stop transmitting speech
+[08/05/20 15:30:57] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:30:57] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:30:57] [stt]      stopping utterance
+[08/05/20 15:30:57] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 15:31:16] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:31:16] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:30.0'
+[08/05/20 15:31:16] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:31:16] [hotword]  start transmitting speech
+[08/05/20 15:31:16] [lights]   turning on led circle at degree:position 30:1
+[08/05/20 15:31:16] [stt]      starting utterance
+[08/05/20 15:31:21] [hotword]  stop transmitting speech
+[08/05/20 15:31:21] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:31:21] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:31:22] [stt]      stopping utterance
+[08/05/20 15:31:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:wie  wird morgen das wetter'
+[08/05/20 15:37:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:37:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:61.86165619150802'
+[08/05/20 15:37:22] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:37:22] [hotword]  start transmitting speech
+[08/05/20 15:37:22] [stt]      starting utterance
+[08/05/20 15:37:22] [lights]   turning on led circle at degree:position 61:2
+[08/05/20 15:37:35] [hotword]  stop transmitting speech
+[08/05/20 15:37:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:37:35] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:37:38] [stt]      stopping utterance
+[08/05/20 15:37:38] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:die morgen wird   morgen die  morgen wird  morgen  das  wetter   morgen wird morgen'
+[08/05/20 15:52:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 15:52:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:135.30368179689225'
+[08/05/20 15:52:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 15:52:23] [hotword]  start transmitting speech
+[08/05/20 15:52:23] [stt]      starting utterance
+[08/05/20 15:52:23] [lights]   turning on led circle at degree:position 135:5
+[08/05/20 15:52:23] [hotword]  stop transmitting speech
+[08/05/20 15:52:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 15:52:23] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 15:52:24] [stt]      stopping utterance
+[08/05/20 15:52:24] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
+[08/05/20 16:13:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/hotword -> 'detected'
+[08/05/20 16:13:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'direction:104.69631820310775'
+[08/05/20 16:13:02] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'on'
+[08/05/20 16:13:02] [hotword]  start transmitting speech
+[08/05/20 16:13:02] [stt]      starting utterance
+[08/05/20 16:13:02] [lights]   turning on led circle at degree:position 104:3
+[08/05/20 16:13:03] [hotword]  stop transmitting speech
+[08/05/20 16:13:03] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/internal/mic_buffer_stream -> 'end'
+[08/05/20 16:13:03] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/lights -> 'off'
+[08/05/20 16:13:03] [stt]      stopping utterance
+[08/05/20 16:13:03] [mqtt]     publishing message: 127.0.0.1:1883 -> jarvis/stt -> 'command:'
