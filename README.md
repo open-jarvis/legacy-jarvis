@@ -1,18 +1,15 @@
 # Jarvis
-just another rather very intelligent system
+"just another rather very intelligent system"  
+Jarvis is an open-source AI-based extendable home assistant
 
-
----
 
 
 ## Hardware/Software used
 - [ReSpeaker 4-Mic Array](#mic)
 - [Snowboy (hotword)](#snowboy)
 - [PocketSphinx (speech-to-text)](#pocketsphinx)
+- [Snips-NLU (language understanding)](#snips-nlu)
 
-
-
-<br>
 
 
 ## Installation
@@ -62,7 +59,7 @@ arecord -Dac108 -f S32_LE -r 16000 -c 4 hello.wav
 aplay hello.wav
 ```
 
-<br>
+
 
 <h3 id="snowboy">Snowboy</h3>
 
@@ -85,7 +82,7 @@ cd swig/Python3
 make
 ```
 
-<br>
+
 
 <h3 id="pocketsphinx">PocketSphinx</h3>
 
@@ -121,4 +118,70 @@ sudo make install
 pip3 install pocketsphinx
 # pocketsphinx is available as a module now:
 # import pocketsphinx
+```
+
+
+
+<h3 id="snips-nlu">Snips-NLU</h3>
+
+#### Installing Snips-NLU and a language pack
+> Available languages can be found here:  
+> https://snips-nlu.readthedocs.io/en/latest/languages.html
+```bash
+sudo bash -c 'echo "deb https://raspbian.snips.ai/stretch stable main" > /etc/apt/sources.list.d/snips.list'
+sudo apt-key adv --fetch-keys  https://raspbian.snips.ai/531DD1A7B702B14D.pub
+sudo apt update
+sudo apt install -y snips-nlu
+snips-nlu download de
+```
+
+#### Creating a dataset
+In order to use the Snips-NLU engine we have to create a sample dataset. This dataset should look like the following:
+```json
+{
+	"entities": {
+		"color": {
+			"automatically_extensible": true,
+			"data": [],
+			"matching_strictness": 1,
+			"use_synonyms": true 
+		},
+		"room": {
+			"automatically_extensible": true,
+			"data": [
+				{
+					"value": "garden",
+					"synonyms": []
+				},
+				{
+					"value": "garage",
+					"synonyms": []
+				}
+			],
+			"matching_strictness": 1,
+			"use_synonyms": true 
+		}
+	},
+	"intents": {
+		"turn_lights_on": {
+			"utterances": [
+				{
+					"data": [
+						{ "text": "turn on the lights in the " },
+						{
+							"entity": "room",
+							"slot_name": "room",
+							"text": "kitchen"
+						}
+					]
+				}
+			]
+		}
+	},
+	"language": "en"
+}
+```
+After the dataset is finished, we can let Snips-NLU train it:
+```bash
+snips-nlu train dataset.json output_model
 ```
