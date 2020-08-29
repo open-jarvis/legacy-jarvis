@@ -3,9 +3,9 @@
 #
 
 
-# usage: nlp.py [-h] [--config CONFIG]
+# usage: nlu.py [-h] [--config CONFIG]
 # 
-# Natural language processing engine using spaCy
+# Natural language understanding engine using spaCy and RASA
 # Convert spoken language into a command (skill) and arguments
 # 
 # optional arguments:
@@ -14,7 +14,7 @@
 
 
 ## input: jarvis/stt -> command:[words]
-## output: jarvis/nlp -> (started|stopped|error|skill:[skill]:arguments[arguments])
+## output: jarvis/nlu -> (started|stopped|error|skill:[skill]:arguments[arguments])
 
 
 ## import global packages
@@ -34,14 +34,11 @@ def handler(client, userdata, message):
 	data = message.payload.decode()
 	if data.startswith("command:"):
 		command = data.split(":")[1]
-		doc = nlp(command)
-		for token in doc:
-			print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
-					token.shape_, token.is_alpha, token.is_stop)
+
 
 
 # add a description and parse arguments
-parser = argparse.ArgumentParser(description="Natural language processing engine using spaCy\nConvert spoken language into a command (skill) and arguments", formatter_class=argparse.RawTextHelpFormatter)
+parser = argparse.ArgumentParser(description="Natural language understanding engine using snips-nlu\nConvert spoken language into a command (skill) and arguments", formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
 args = parser.parse_args()
 
@@ -49,11 +46,7 @@ args = parser.parse_args()
 # get the config file from argparse and read it
 config = configparser.ConfigParser()
 config.read(args.config)
-config = config["nlp"]
-
-
-# initialize nlp instance
-nlp = spacy.load(config["model"])
+config = config["nlu"]
 
 
 #initialize mqtt instance
