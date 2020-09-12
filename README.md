@@ -5,6 +5,7 @@ Jarvis is an open-source AI-based extendable home assistant
 
 
 ## Hardware/Software used
+- [Downloading the Jarvis Code](#jarvis)
 - [ReSpeaker 4-Mic Array](#mic)
 - [Snowboy (hotword)](#snowboy)
 - [PocketSphinx (speech-to-text)](#pocketsphinx)
@@ -13,6 +14,19 @@ Jarvis is an open-source AI-based extendable home assistant
 
 
 ## Installation
+
+
+<h3 id="jarvis">Downloading the Jarvis Code</h3>
+
+First, you'll need to create a folder to install Jarvis in. You can use any directory, but make sure it's readable and writeable.
+
+```bash
+sudo mkdir /jarvis
+sudo chown pi:pi /jarvis
+git clone https://github.com/open-jarvis/jarvis /jarvis
+```
+
+
 
 
 <h3 id="mic">ReSpeaker 4-Mic Array</h3>
@@ -24,10 +38,11 @@ Jarvis is an open-source AI-based extendable home assistant
 ```bash
 sudo apt update -y
 sudo apt upgrade -y
+sudo apt install git -y
 git clone https://github.com/respeaker/seeed-voicecard.git
-cd seeed-voicecard
+cd seeed-voicecard --compat-kernel
 sudo ./install.sh
-reboot
+sudo reboot
 ```
 
 #### Change the audio output to 3.5mm jack
@@ -48,11 +63,6 @@ sudo raspi-config
 # Exit the tool
 ```
 
-#### Install python packages
-```bash
-pip install webrtcvad # for voice activity detection
-```
-
 #### Test the setup
 ```bash
 arecord -Dac108 -f S32_LE -r 16000 -c 4 hello.wav
@@ -68,14 +78,14 @@ aplay hello.wav
 #### Installing dependencies
 ```bash
 sudo apt-get install -y python-pip python3-pip python-pyaudio python3-pyaudio sox swig libatlas-base-dev gcc g++ make wget
-pip install pyaudio
-pip3 install pyaudio
+pip install pyaudio webrtcvad
+pip3 install pyaudio webrtcvad
 ```
 
 #### Compiling Snowboy
 ```bash
-cd <jarvis-installation-path>/lib
-git clone https://github.com/f1ps1/snowboy
+cd <jarvis-installation-path>/engine/lib	# <jarvis-installation-path> should be /jarvis
+git clone https://github.com/open-jarvis/snowboy
 cd snowboy
 sudo python3 setup.py install
 cd swig/Python3
@@ -100,7 +110,7 @@ tar -xzvf pocketsphinx.tar.gz
 
 #### Compiling CMUSphinx and PocketSphinx
 ```bash
-sudo apt install -y bison libasound2-dev swig
+sudo apt install -y bison libasound2-dev libpulse-dev swig
 
 cd sphinxbase-5prealpha
 ./configure --enable-fixed
@@ -125,14 +135,20 @@ pip3 install pocketsphinx
 <h3 id="snips-nlu">Snips-NLU</h3>
 
 #### Installing Snips-NLU and a language pack
+
 > Available languages can be found here:  
 > https://snips-nlu.readthedocs.io/en/latest/languages.html
+
 ```bash
+curl https://sh.rustup.rs -sSf | sh
+pip3 install setuptools_rust
+sudo reboot
+
 sudo bash -c 'echo "deb https://raspbian.snips.ai/stretch stable main" > /etc/apt/sources.list.d/snips.list'
 sudo apt-key adv --fetch-keys  https://raspbian.snips.ai/531DD1A7B702B14D.pub
-sudo apt update
+sudo apt update -y
 sudo apt install -y snips-nlu
-snips-nlu download de
+pip3 install snips-nlu
 ```
 
 #### Creating a dataset
