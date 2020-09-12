@@ -93,12 +93,12 @@ args = parser.parse_args()
 
 
 # get the config file from the argparser and read it
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
 config.read(args.config)
 
 
 # read the animation config from the above config file
-animation = configparser.ConfigParser()
+animation = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
 animation.read(config["lights"]["animation"])
 
 

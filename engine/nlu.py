@@ -22,10 +22,7 @@ import os, sys, time, argparse, configparser
 
 
 ## import local packages
-import spacy
 import lib.helper as helper
-
-
 
 
 # this function is being called when the stt engine detects a command
@@ -34,6 +31,7 @@ def handler(client, userdata, message):
 	data = message.payload.decode()
 	if data.startswith("command:"):
 		command = data.split(":")[1]
+		print("command:"+command)
 
 
 
@@ -43,20 +41,25 @@ parser.add_argument("--config", type=str, help="Path to jarvis configuration fil
 args = parser.parse_args()
 
 
+
 # get the config file from argparse and read it
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
 config.read(args.config)
 config = config["nlu"]
 
 
-#initialize mqtt instance
+# initialize mqtt instance
 mqtt = helper.MQTT(client_id="nlp.py")
 mqtt.on_message(handler)
 mqtt.subscribe("jarvis/stt")
 
 
 # mark as started
-mqtt.publish("jarvis/nlp", "started")
+mqtt.publish("jarvis/nlu", "started")
+
+
+# start snips instance
+snips_nlu = helper.SnipsNLU(config["path_to_executable"])
 
 
 # mainloop

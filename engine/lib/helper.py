@@ -5,7 +5,7 @@
 
 ## import global packages
 import paho.mqtt.client as mqtt
-import time, random, string, gpiozero, collections
+import time, random, string, gpiozero, collections, os
 
 
 # logs a message with given prefix, also accepts an argument to control (disable) logging to file
@@ -13,7 +13,7 @@ def log(type, msg, do_not_log=False):
 	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
 	print(logstr)
 	if not do_not_log:
-		with open("/home/pi/jarvis/log/jarvis.log", "a+") as logf:
+		with open("/jarvis/log/jarvis.log", "a+") as logf:
 			logf.write(logstr + "\n")
 
 
@@ -29,6 +29,24 @@ def flatten(x):
     else:
         return [x]
 
+
+
+# SnipsNLU(host=127.0.0.1, port=1883, client_id=[random])
+# 	.on_connect(callback[client, userdata, flags, rc])
+# 	.on_message(callback[client, userdata, message])
+# 	.publish(topic, payload)
+# 	.subscribe(topic)
+class SnipsNLU():
+	def __init__(self, executable_path):
+		if not os.path.exists(executable_path):
+			log("s-nlu", "couldn't find executable file: " + str(executable_path))
+			raise Exception("couldn't find executable file: " + str(executable_path))
+			return
+		
+		self.path = executable_path
+	
+	def train(self, infile, outfile):
+		
 
 
 

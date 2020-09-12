@@ -6,6 +6,7 @@ just another rather very intelligent system
 
 
 ## Hardware/Software used
+- [Packages to Install](#packages)
 - [ReSpeaker 4-Mic Array](#mic)
 - [Snowboy (hotword)](#snowboy)
 - [PocketSphinx (speech-to-text)](#pocketsphinx)
@@ -16,6 +17,15 @@ just another rather very intelligent system
 
 
 ## Installation
+
+
+<h3 id="packages">Packages to install</h3>
+```bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install -y git python3 python3-pip mosquitto
+pip3 install paho.mqtt gpiozero spidev
+```
 
 
 <h3 id="mic">ReSpeaker 4-Mic Array</h3>
