@@ -136,7 +136,25 @@ pip3 install pocketsphinx
 
 #### Installing Snips-NLU and a language pack
 
-> Available languages can be found here:  
+[Instructions](https://github.com/snipsco/snips-issues/issues/161#issuecomment-508520769)
+
+```bash
+sudo apt install -y libatlas3-base=3.10.3-8+rpi1 libgfortran5
+cd /home/pi
+wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scipy-1.3.3-cp37-cp37m-linux_armv7l.whl?raw=true
+wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl?raw=true
+wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl?raw=true
+wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl?raw=true
+wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/snips_nlu-0.20.2-py3-none-any.whl?raw=true
+
+sudo pip3 install scipy-1.3.3-cp37-cp37m-linux_armv7l.whl
+sudo pip3 install scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl
+sudo pip3 install snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl
+sudo pip3 install snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl
+sudo pip3 install snips_nlu-0.20.2-py3-none-any.whl
+```
+
+<!-- > Available languages can be found here:  
 > https://snips-nlu.readthedocs.io/en/latest/languages.html
 
 ```bash
@@ -149,7 +167,8 @@ sudo apt-key adv --fetch-keys  https://raspbian.snips.ai/531DD1A7B702B14D.pub
 sudo apt update -y
 sudo apt install -y snips-nlu
 pip3 install snips-nlu
-```
+``` -->
+
 
 #### Creating a dataset
 In order to use the Snips-NLU engine we have to create a sample dataset. This dataset should look like the following:
