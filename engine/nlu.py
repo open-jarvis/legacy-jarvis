@@ -14,7 +14,7 @@
 
 
 ## input: jarvis/stt -> command:[words]
-## output: jarvis/nlu -> (started|stopped|error|skill:[skill]:arguments[arguments])
+## output: jarvis/nlu -> (started|stopped|error|intent:[intent]:probability:[probability]:slots:[slots])
 
 
 ## import global packages
@@ -28,11 +28,13 @@ import snips_nlu
 
 # this function is being called when the stt engine detects a command
 def handler(client, userdata, message):
-	global nlp
+	global nlp, mqtt
 	data = message.payload.decode()
 	if data.startswith("command:"):
 		command = data.split(":")[1]
-		print("command:"+command)
+		parsed = nlu.parse(command)
+		mqtt.publish("jarvis/nlu", "intent:" + str(parsed["intent"]["intentName"]) + ":probability:" + str(parsed["intent"]["probability"]))
+
 
 
 
@@ -63,24 +65,17 @@ mqtt.publish("jarvis/nlu", "started")
 with io.open(config["dataset"]) as f:
 	dataset = json.load(f)
 
-f = open("/var/www/html/database/parsed_before.json", "w")
-f.write(json.dumps(dataset))
-f.close()
-
 dataset = helper.transform_dataset(dataset)
 
-f = open("/var/www/html/database/parsed_after.json", "w")
-f.write(json.dumps(dataset))
-f.close()
+
+helper.log("nlu", "training nlu engine")
+start = time.time()
 
 nlu = snips_nlu.SnipsNLUEngine(dataset)
 nlu = nlu.fit(dataset)
 
-text = "Wie ist das Wetter?"
-
-parsed = nlu.parse(text)
-
-print(parsed)
+helper.log("nlu", "fininshed training (took {}s)".format(time.time()-start))
+mqtt.publish("jarvis/nlu", "started")
 
 
 # mainloop
