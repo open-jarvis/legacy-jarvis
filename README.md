@@ -152,6 +152,8 @@ sudo pip3 install scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl
 sudo pip3 install snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl
 sudo pip3 install snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl
 sudo pip3 install snips_nlu-0.20.2-py3-none-any.whl
+
+sudo python -m snips_nlu download de
 ```
 
 <!-- > Available languages can be found here:  
