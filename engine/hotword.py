@@ -38,7 +38,7 @@ args = parser.parse_args()
 
 
 ## take the config file from the argument list and read the configuration
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
 config.read(args.config)
 config = config["hotword"]
 

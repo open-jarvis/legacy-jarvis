@@ -5,13 +5,20 @@ Jarvis is an open-source AI-based extendable home assistant
 
 
 ## Hardware/Software used
+<<<<<<< HEAD
 - [Downloading the Jarvis Code](#jarvis)
+=======
+- [Packages to Install](#packages)
+>>>>>>> natural-language-understanding
 - [ReSpeaker 4-Mic Array](#mic)
 - [Snowboy (hotword)](#snowboy)
 - [PocketSphinx (speech-to-text)](#pocketsphinx)
 - [Snips-NLU (language understanding)](#snips-nlu)
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> natural-language-understanding
 
 ## Installation
 
@@ -27,6 +34,15 @@ git clone https://github.com/open-jarvis/jarvis /jarvis
 ```
 
 
+
+
+<h3 id="packages">Packages to install</h3>
+```bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install -y git python3 python3-pip mosquitto
+pip3 install paho.mqtt gpiozero spidev
+```
 
 
 <h3 id="mic">ReSpeaker 4-Mic Array</h3>
@@ -130,7 +146,7 @@ pip3 install pocketsphinx
 # import pocketsphinx
 ```
 
-
+<br>
 
 <h3 id="snips-nlu">Snips-NLU</h3>
 

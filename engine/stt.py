@@ -93,7 +93,7 @@ args = parser.parse_args()
 
 
 # get the config file from argparse and read it
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
 config.read(args.config)
 config = config["stt"]
 

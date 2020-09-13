@@ -5,7 +5,7 @@
 
 ## import global packages
 import paho.mqtt.client as mqtt
-import time, random, string, gpiozero, collections
+import time, random, string, gpiozero, collections, os
 
 
 # logs a message with given prefix, also accepts an argument to control (disable) logging to file
@@ -13,7 +13,7 @@ def log(type, msg, do_not_log=False):
 	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
 	print(logstr)
 	if not do_not_log:
-		with open("/home/pi/jarvis/log/jarvis.log", "a+") as logf:
+		with open("/jarvis/log/jarvis.log", "a+") as logf:
 			logf.write(logstr + "\n")
 
 
@@ -27,7 +27,25 @@ def flatten(x):
     if isinstance(x, collections.Iterable):
         return [a for i in x for a in flatten(i)]
     else:
-        return [x]
+        return [x]	
+
+
+# transforms the dataset from the webui to a snips-readable format 
+def transform_dataset(dataset):
+	del dataset["name"]
+	del dataset["wakeword"]
+	
+	dataset["entities"] = dataset["slots"]
+	del dataset["slots"]
+
+
+	dataset["intents"] = {}
+	for skill in dataset["skills"]:
+		for intent in dataset["skills"][skill]["intents"]:
+			dataset["intents"][intent] = dataset["skills"][skill]["intents"][intent]
+	del dataset["skills"]
+
+	return dataset
 
 
 
