@@ -146,6 +146,8 @@ sudo apt-key adv --fetch-keys  https://raspbian.snips.ai/531DD1A7B702B14D.pub
 sudo apt update
 sudo apt install -y snips-nlu
 snips-nlu download de
+
+python -m snips_nlu download de
 ```
 
 #### Creating a dataset

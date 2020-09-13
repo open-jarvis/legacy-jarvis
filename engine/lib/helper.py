@@ -27,26 +27,26 @@ def flatten(x):
     if isinstance(x, collections.Iterable):
         return [a for i in x for a in flatten(i)]
     else:
-        return [x]
+        return [x]	
 
 
-
-# SnipsNLU(host=127.0.0.1, port=1883, client_id=[random])
-# 	.on_connect(callback[client, userdata, flags, rc])
-# 	.on_message(callback[client, userdata, message])
-# 	.publish(topic, payload)
-# 	.subscribe(topic)
-class SnipsNLU():
-	def __init__(self, executable_path):
-		if not os.path.exists(executable_path):
-			log("s-nlu", "couldn't find executable file: " + str(executable_path))
-			raise Exception("couldn't find executable file: " + str(executable_path))
-			return
-		
-		self.path = executable_path
+# transforms the dataset from the webui to a snips-readable format 
+def transform_dataset(dataset):
+	del dataset["name"]
+	del dataset["wakeword"]
 	
-	def train(self, infile, outfile):
-		
+	dataset["entities"] = dataset["slots"]
+	del dataset["slots"]
+
+
+	dataset["intents"] = {}
+	for skill in dataset["skills"]:
+		for intent in dataset["skills"][skill]["intents"]:
+			dataset["intents"][intent] = dataset["skills"][skill]["intents"][intent]
+	del dataset["skills"]
+
+	return dataset
+
 
 
 

@@ -18,11 +18,12 @@
 
 
 ## import global packages
-import os, sys, time, argparse, configparser
+import io, os, sys, time, json, argparse, configparser
 
 
 ## import local packages
 import lib.helper as helper
+import snips_nlu
 
 
 # this function is being called when the stt engine detects a command
@@ -49,7 +50,7 @@ config = config["nlu"]
 
 
 # initialize mqtt instance
-mqtt = helper.MQTT(client_id="nlp.py")
+mqtt = helper.MQTT(client_id="nlu.py")
 mqtt.on_message(handler)
 mqtt.subscribe("jarvis/stt")
 
@@ -59,7 +60,27 @@ mqtt.publish("jarvis/nlu", "started")
 
 
 # start snips instance
-snips_nlu = helper.SnipsNLU(config["path_to_executable"])
+with io.open(config["dataset"]) as f:
+	dataset = json.load(f)
+
+f = open("/var/www/html/database/parsed_before.json", "w")
+f.write(json.dumps(dataset))
+f.close()
+
+dataset = helper.transform_dataset(dataset)
+
+f = open("/var/www/html/database/parsed_after.json", "w")
+f.write(json.dumps(dataset))
+f.close()
+
+nlu = snips_nlu.SnipsNLUEngine(dataset)
+nlu = nlu.fit(dataset)
+
+text = "Wie ist das Wetter?"
+
+parsed = nlu.parse(text)
+
+print(parsed)
 
 
 # mainloop
