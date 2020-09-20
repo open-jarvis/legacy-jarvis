@@ -37,12 +37,11 @@ def handler(client, userdata, message):
 
 
 
-
 # add a description and parse arguments
 parser = argparse.ArgumentParser(description="Natural language understanding engine using snips-nlu\nConvert spoken language into a command (skill) and arguments", formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("--config", type=str, help="Path to jarvis configuration file", default="../jarvis.conf")
+parser.add_argument("--message", type=str, help="A string to run against the NLU (Might take several seconds)")
 args = parser.parse_args()
-
 
 
 # get the config file from argparse and read it
@@ -76,6 +75,12 @@ nlu = nlu.fit(dataset)
 
 helper.log("nlu", "fininshed training (took {}s)".format(time.time()-start))
 mqtt.publish("jarvis/nlu", "started")
+
+
+if args.message is not None:
+	parsed = nlu.parse(args.message)
+	print(json.dumps(parsed))
+	exit(0)
 
 
 # mainloop

@@ -5,16 +5,15 @@
 
 ## import global packages
 import paho.mqtt.client as mqtt
-import time, random, string, gpiozero, collections, os
+import time, random, string, gpiozero, collections, os, re, string
 
 
 # logs a message with given prefix, also accepts an argument to control (disable) logging to file
 def log(type, msg, do_not_log=False):
+	# TODO: remove hardcoded log path
 	logstr = "[{}] [{}]  {}".format(time.strftime("%D %H:%M:%S", time.localtime(time.time())), str(type), (" " * (7-len(type))) + str(msg))
-	print(logstr)
-	if not do_not_log:
-		with open("/jarvis/log/jarvis.log", "a+") as logf:
-			logf.write(logstr + "\n")
+	with open("/jarvis/log/jarvis.log", "a+") as logf:
+		logf.write(logstr + "\n")
 
 
 # resizes an array to given length
@@ -35,9 +34,10 @@ def transform_dataset(dataset):
 	del dataset["name"]
 	del dataset["wakeword"]
 	
+	pattern = re.compile('[^\w ]+')
+
 	dataset["entities"] = dataset["slots"]
 	del dataset["slots"]
-
 
 	dataset["intents"] = {}
 	for skill in dataset["skills"]:
@@ -45,6 +45,19 @@ def transform_dataset(dataset):
 			dataset["intents"][intent] = dataset["skills"][skill]["intents"][intent]
 	del dataset["skills"]
 
+	## make entities lower case
+	for entity in dataset["entities"]:
+		for i in range(len(dataset["entities"][entity]["data"])):
+			dataset["entities"][entity]["data"][i]["value"] = dataset["entities"][entity]["data"][i]["value"].lower()
+			for j in range(len(dataset["entities"][entity]["data"][i]["synonyms"])):
+				dataset["entities"][entity]["data"][i]["synonyms"][j] = dataset["entities"][entity]["data"][i]["synonyms"][j].lower()
+
+	## make training examples lowercase and strip !. and other signs
+	for intent in dataset["intents"]:
+		for i in range(len(dataset["intents"][intent]["utterances"])):
+			for j in range(len(dataset["intents"][intent]["utterances"][i]["data"])):
+				dataset["intents"][intent]["utterances"][i]["data"][j]["text"] = pattern.sub("", dataset["intents"][intent]["utterances"][i]["data"][j]["text"]).lower()
+			
 	return dataset
 
 
