@@ -5,20 +5,14 @@ Jarvis is an open-source AI-based extendable home assistant
 
 
 ## Hardware/Software used
-<<<<<<< HEAD
 - [Downloading the Jarvis Code](#jarvis)
-=======
 - [Packages to Install](#packages)
->>>>>>> natural-language-understanding
 - [ReSpeaker 4-Mic Array](#mic)
 - [Snowboy (hotword)](#snowboy)
 - [PocketSphinx (speech-to-text)](#pocketsphinx)
 - [Snips-NLU (language understanding)](#snips-nlu)
-<<<<<<< HEAD
 
 
-=======
->>>>>>> natural-language-understanding
 
 ## Installation
 
