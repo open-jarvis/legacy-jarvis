@@ -4,8 +4,12 @@
 
 
 ## import global packages
-import paho.mqtt.client as mqtt
-import time, random, string, gpiozero, collections, os, re, string
+try:
+	import paho.mqtt.client as mqtt
+	import gpiozero
+except ImportError:
+	pass
+import time, random, string, collections, os, re, string
 
 
 # logs a message with given prefix, also accepts an argument to control (disable) logging to file
@@ -189,8 +193,11 @@ class Lights():
 # apa102 library
 # from https://github.com/tinue/APA102_Pi
 # This is the main driver module for APA102 LEDs
-import spidev
-from math import ceil
+try:
+	import spidev
+	from math import ceil
+except ImportError:
+	pass
 
 RGB_MAP = { 'rgb': [3, 2, 1], 'rbg': [3, 1, 2], 'grb': [2, 3, 1],
 			'gbr': [2, 1, 3], 'brg': [1, 3, 2], 'bgr': [1, 2, 3] }

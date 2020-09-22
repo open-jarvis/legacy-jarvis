@@ -35,6 +35,14 @@ def handler(client, userdata, message):
 		parsed = nlu.parse(command)
 		mqtt.publish("jarvis/nlu", "intent:" + str(parsed["intent"]["intentName"]) + ":probability:" + str(parsed["intent"]["probability"]))
 
+def runSnipsOnce(cmd):
+	global snips_nlu, config
+	with io.open(config["dataset"]) as f:
+		dataset = json.load(f)
+	dataset = helper.transform_dataset(dataset)
+	nlu = snips_nlu.SnipsNLUEngine(dataset)
+	nlu = nlu.fit(dataset)
+	return nlu.parse(cmd)
 
 
 # add a description and parse arguments
@@ -50,11 +58,15 @@ config.read(args.config)
 config = config["nlu"]
 
 
+if args.message is not None:
+	print(runSnipsOnce(args.message))
+	exit(0)
+
+
 # initialize mqtt instance
 mqtt = helper.MQTT(client_id="nlu.py")
 mqtt.on_message(handler)
 mqtt.subscribe("jarvis/stt")
-
 
 # mark as started
 mqtt.publish("jarvis/nlu", "started")
