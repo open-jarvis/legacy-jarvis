@@ -35,6 +35,7 @@ class Handler(BaseHTTPRequestHandler):
 	def do_GET(self):
 		self.send_response(200)
 		self.send_header('Content-type','text/plain')
+		self.send_header('Access-Control-Allow-Origin','*')
 		self.end_headers()
 		
 		path = self.path.split("?")[0]
@@ -43,7 +44,7 @@ class Handler(BaseHTTPRequestHandler):
 		if path == "/execute":
 			try:
 				cmd = arguments["command"][0]
-				self.wfile.write(json.dumps({"success":True,"message":runSnipsOnce(cmd)}).encode())
+				self.wfile.write(json.dumps({"success":True,"message":nlu.parse(cmd)}).encode())
 			except KeyError:
 				self.wfile.write(json.dumps({"success":False,"message":"need to set 'command' url argument"}).encode())
 
@@ -55,15 +56,6 @@ def handler(client, userdata, message):
 		command = data.split(":")[1]
 		parsed = nlu.parse(command)
 		mqtt.publish("jarvis/nlu", json.dumps(parsed))
-
-def runSnipsOnce(cmd):
-	global snips_nlu, config
-	with io.open(config["dataset"]) as f:
-		dataset = json.load(f)
-	dataset = helper.transform_dataset(dataset)
-	nlu = snips_nlu.SnipsNLUEngine(dataset)
-	nlu = nlu.fit(dataset)
-	return nlu.parse(cmd)
 
 
 # add a description and parse arguments
