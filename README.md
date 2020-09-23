@@ -36,7 +36,7 @@ git clone https://github.com/open-jarvis/jarvis /jarvis
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y git python3 python3-pip mosquitto
-pip3 install paho.mqtt gpiozero spidev
+pip3 install paho-mqtt gpiozero spidev
 ```
 
 
@@ -164,23 +164,9 @@ sudo pip3 install snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl
 sudo pip3 install snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl
 sudo pip3 install snips_nlu-0.20.2-py3-none-any.whl
 
-sudo python -m snips_nlu download de
+sudo python3 -m snips_nlu download de
 ```
 
-<!-- > Available languages can be found here:  
-> https://snips-nlu.readthedocs.io/en/latest/languages.html
-
-```bash
-curl https://sh.rustup.rs -sSf | sh
-pip3 install setuptools_rust
-sudo reboot
-
-sudo bash -c 'echo "deb https://raspbian.snips.ai/stretch stable main" > /etc/apt/sources.list.d/snips.list'
-sudo apt-key adv --fetch-keys  https://raspbian.snips.ai/531DD1A7B702B14D.pub
-sudo apt update -y
-sudo apt install -y snips-nlu
-pip3 install snips-nlu
-``` -->
 
 
 #### Creating a dataset
