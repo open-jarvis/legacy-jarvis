@@ -31,6 +31,7 @@ git clone https://github.com/open-jarvis/jarvis /jarvis
 
 
 <h3 id="packages">Packages to install</h3>
+
 ```bash
 sudo apt update -y
 sudo apt upgrade -y
