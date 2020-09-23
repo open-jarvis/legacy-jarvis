@@ -19,12 +19,24 @@
 
 ## import global packages
 import io, os, sys, time, json, argparse, configparser
-
+from http.server import BaseHTTPRequestHandler, HTTPServer
+# .HTTPServer
 
 ## import local packages
 import lib.helper as helper
 import snips_nlu
 
+
+port = 1884
+
+
+class Handler(BaseHTTPRequestHandler):
+	def do_GET(self):
+		self.send_response(200)
+		self.send_header('Content-type','text/plain')
+		self.end_headers()
+		
+		self.wfile.write(str(self.path))
 
 # this function is being called when the stt engine detects a command
 def handler(client, userdata, message):
@@ -63,13 +75,15 @@ if args.message is not None:
 	exit(0)
 
 
-# initialize mqtt instance
+# initialize mqtt/webserver instance
 mqtt = helper.MQTT(client_id="nlu.py")
 mqtt.on_message(handler)
 mqtt.subscribe("jarvis/stt")
+server = HTTPServer(('', port), Handler)
 
 # mark as started
 mqtt.publish("jarvis/nlu", "started")
+
 
 
 # start snips instance
@@ -77,6 +91,7 @@ with io.open(config["dataset"]) as f:
 	dataset = json.load(f)
 
 dataset = helper.transform_dataset(dataset)
+
 
 
 helper.log("nlu", "training nlu engine")
@@ -89,6 +104,7 @@ helper.log("nlu", "fininshed training (took {}s)".format(time.time()-start))
 mqtt.publish("jarvis/nlu", "started")
 
 
+
 if args.message is not None:
 	parsed = nlu.parse(args.message)
 	print(json.dumps(parsed))
@@ -97,4 +113,4 @@ if args.message is not None:
 
 # mainloop
 while True:
-	time.sleep(1)
+	server.handle_request()
