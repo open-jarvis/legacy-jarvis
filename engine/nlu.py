@@ -19,8 +19,9 @@
 
 ## import global packages
 import io, os, sys, time, json, argparse, configparser
+import urllib.parse as urlparse
 from http.server import BaseHTTPRequestHandler, HTTPServer
-# .HTTPServer
+
 
 ## import local packages
 import lib.helper as helper
@@ -36,7 +37,15 @@ class Handler(BaseHTTPRequestHandler):
 		self.send_header('Content-type','text/plain')
 		self.end_headers()
 		
-		self.wfile.write(str(self.path))
+		path = self.path.split("?")[0]
+		arguments = urlparse.parse_qs((urlparse.urlparse(self.path)).query)
+
+		if path == "/execute":
+			try:
+				cmd = arguments["command"][0]
+				self.wfile.write(json.dumps({"success":True,"message":runSnipsOnce(cmd)}).encode())
+			except KeyError:
+				self.wfile.write(json.dumps({"success":False,"message":"need to set 'command' url argument"}).encode())
 
 # this function is being called when the stt engine detects a command
 def handler(client, userdata, message):

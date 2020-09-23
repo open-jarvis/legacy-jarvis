@@ -4,12 +4,8 @@
 
 
 ## import global packages
-try:
-	import paho.mqtt.client as mqtt
-	import gpiozero
-except ImportError:
-	pass
-import time, random, string, collections, os, re, string
+import paho.mqtt.client as mqtt
+import time, random, string, collections, os, re, string, gpiozero
 
 
 # logs a message with given prefix, also accepts an argument to control (disable) logging to file
