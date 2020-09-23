@@ -33,7 +33,7 @@ def handler(client, userdata, message):
 	if data.startswith("command:"):
 		command = data.split(":")[1]
 		parsed = nlu.parse(command)
-		mqtt.publish("jarvis/nlu", "intent:" + str(parsed["intent"]["intentName"]) + ":probability:" + str(parsed["intent"]["probability"]))
+		mqtt.publish("jarvis/nlu", json.dumps(parsed))
 
 def runSnipsOnce(cmd):
 	global snips_nlu, config
