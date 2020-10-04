@@ -15,7 +15,7 @@
 
 ## input: nothing
 ## raw_output: jarvis/internal/mic_buffer_stream -> raw bytes mic buffer stream
-## output: jarvis/hotword -> (detected|started|stopped|error|direction:[degrees])
+## output: jarvis/hotword -> (detected|started|stopped|error|direction:[degrees]|voice_activity_start|voice_activity_end)
 
 
 ## import global packages
@@ -90,7 +90,7 @@ try:
 			# if speech gets detected
 			if vad.is_speech(chunk[0::CHANNELS].tobytes(), RATE):
 				if not currently_speaking:
-					helper.log("hotword", "voice activity detected", True)
+					helper.log("hotword", "voice_activity_start", True)
 				speech_count += 1
 				# save the current time (used in combination with MAX_VOICE_INACTIVITY_SECONDS)
 				speech_detected = time.time()
@@ -102,7 +102,7 @@ try:
 			if time.time() - speech_detected > MAX_VOICE_INACTIVITY_SECONDS:
 				if currently_speaking:
 					# log a message when the user stopped speaking
-					helper.log("hotword", "voice activity ended", True)
+					helper.log("hotword", "voice_activity_end", True)
 
 				# if the user said the hotword, gave a command and stopped talking now
 				if hotword_detected and currently_speaking:
