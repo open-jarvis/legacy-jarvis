@@ -13,7 +13,7 @@
 
 
 # import global and local packages
-import subprocess, os, sys, time, argparse, json, signal, urllib.request
+import subprocess, os, sys, time, argparse, json, signal, urllib.request, socket
 import urllib.parse as urlparse
 import engine.lib.helper as helper
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -92,7 +92,24 @@ class Handler(BaseHTTPRequestHandler):
 				self.wfile.write(urllib.request.urlopen("http://127.0.0.1:1885/execute?command=" + cmd).read())
 			except Exception as e:
 				self.wfile.write(json.dumps({"success":False,"message":str(e)}).encode())
+		if path == "/discovery":
+			try:
+				self.wfile.write(json.dumps({"success":True, "jarvis": get_ip()}).encode())
+			except Exception as e:
+				self.wfile.write(json.dumps({"success":True, "jarvis": ""}).encode())
 
+# gets ip address
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
 
 # mqtt callback
 def handler(client, userdata, message):
