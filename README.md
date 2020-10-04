@@ -88,7 +88,7 @@ aplay hello.wav
 
 #### Installing dependencies
 ```bash
-sudo apt-get install -y python-pip python3-pip python-pyaudio python3-pyaudio sox swig libatlas-base-dev gcc g++ make wget
+sudo apt-get install -y python-pip python3-pip python-pyaudio python3-pyaudio sox swig libatlas-base-dev gcc g++ make wget pulseaudio
 pip install pyaudio webrtcvad
 pip3 install pyaudio webrtcvad
 ```

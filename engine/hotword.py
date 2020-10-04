@@ -28,7 +28,7 @@ import lib.helper as helper
 import lib.snowboy.examples.Python3.snowboydecoder as snowboy
 import lib.snowboy.examples.Python3.snowboydetect as snowboydetect
 from lib.doa.gcc_phat import gcc_phat
-from lib.doa.mic_array import MicArray 
+from lib.doa.mic_array import MicArray
 
 
 ## add a description and arguments
@@ -47,7 +47,7 @@ config = config["hotword"]
 MODEL_PATH						= config["model"]
 RESOURCE_PATH					= config["resource"]
 SENSITIVITY						= config["sensitivity"]
-MAX_VOICE_INACTIVITY_SECONDS	= config["max_voice_inactivity_seconds"]
+MAX_VOICE_INACTIVITY_SECONDS	= float(config["max_voice_inactivity_seconds"])
 RATE							= 16000
 CHANNELS						= 4
 KWS_FRAMES						= 10     # ms
@@ -74,8 +74,10 @@ currently_speaking = False
 
 
 # mainloop
-try:
+try:			
 	with MicArray(RATE, CHANNELS, RATE * KWS_FRAMES / 1000) as mic:
+		mqtt.publish("jarvis/hotword", "started")
+
 		# read raw microphone chunks
 		for chunk in mic.read_chunks():
 			history.append(chunk)

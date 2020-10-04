@@ -15,7 +15,7 @@
 
 ## input: jarvis/hotword -> detected
 ## raw_input: jarvis/internal/mic_buffer_stream -> raw bytes mic buffer stream
-## output: jarvis/stt -> (command:[words]|started|stopped|error)
+## output: jarvis/stt -> (started|stopped|error|command:[words])
 
 
 ## import global packages
@@ -132,3 +132,5 @@ try:
 except KeyboardInterrupt:
 	mqtt.publish("jarvis/stt", "stopped")
 	exit(0)
+
+mqtt.publish("jarvis/stt", "stopped")

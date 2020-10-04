@@ -28,13 +28,14 @@ import lib.helper as helper
 import snips_nlu
 
 
-port = 1884
+## set port for webserver
+port = 1885
 
 
 class Handler(BaseHTTPRequestHandler):
 	def do_GET(self):
 		self.send_response(200)
-		self.send_header('Content-type','text/plain')
+		self.send_header('Content-type','text/json')
 		self.send_header('Access-Control-Allow-Origin','*')
 		self.end_headers()
 		
@@ -95,6 +96,7 @@ dataset = helper.transform_dataset(dataset)
 
 
 
+# log messages
 helper.log("nlu", "training nlu engine")
 start = time.time()
 
@@ -102,7 +104,6 @@ nlu = snips_nlu.SnipsNLUEngine(dataset)
 nlu = nlu.fit(dataset)
 
 helper.log("nlu", "fininshed training (took {}s)".format(time.time()-start))
-mqtt.publish("jarvis/nlu", "started")
 
 
 
@@ -115,3 +116,5 @@ if args.message is not None:
 # mainloop
 while True:
 	server.handle_request()
+
+mqtt.publish("jarvis/nlu", "stopped")

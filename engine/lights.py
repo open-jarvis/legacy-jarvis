@@ -14,7 +14,7 @@
 
 
 ## input: jarvis/lights -> (on|off|direction:[degrees])
-## output: nothing
+## output: jarvis/lights -> (started|error|stopped)
 
 
 ## import global packages
@@ -124,8 +124,11 @@ lights.add_color("secondary", SECONDARY_COLOR)
 mqtt = helper.MQTT(client_id="lights.py")
 mqtt.on_message(handler)
 mqtt.subscribe("jarvis/lights")
+mqtt.publish("jarvis/lights", "started")
 
 
 # mainloop
 while True:
 	time.sleep(1)
+
+mqtt.publish("jarvis/lights", "stopped")
