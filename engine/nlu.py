@@ -34,6 +34,8 @@ port = 1885
 
 class Handler(BaseHTTPRequestHandler):
 	def do_GET(self):
+		global dataset
+
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
 		self.send_header('Access-Control-Allow-Origin','*')
@@ -48,6 +50,11 @@ class Handler(BaseHTTPRequestHandler):
 				self.wfile.write(json.dumps({"success":True,"message":nlu.parse(cmd)}).encode())
 			except KeyError:
 				self.wfile.write(json.dumps({"success":False,"message":"need to set 'command' url argument"}).encode())
+		if path == "/info":
+			try:
+				self.wfile.write(json.dumps({"success":True,"message":dataset}).encode())
+			except KeyError:
+				self.wfile.write(json.dumps({"success":False,"message":"something went wrong"}).encode())
 
 # this function is being called when the stt engine detects a command
 def handler(client, userdata, message):
@@ -103,7 +110,7 @@ start = time.time()
 nlu = snips_nlu.SnipsNLUEngine(dataset)
 nlu = nlu.fit(dataset)
 
-helper.log("nlu", "fininshed training (took {}s)".format(time.time()-start))
+helper.log("nlu", "fininshed training (took {:.2f}s)".format(time.time()-start))
 
 
 

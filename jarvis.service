@@ -1,0 +1,11 @@
+[Unit]
+Description=Jarvis is an AI-based smart home assistant
+
+[Service]
+User=pi
+WorkingDirectory=/jarvis
+ExecStart=python3 jarvis.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

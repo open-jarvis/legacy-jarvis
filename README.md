@@ -36,7 +36,7 @@ git clone https://github.com/open-jarvis/jarvis /jarvis
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y git python3 python3-pip mosquitto
-pip3 install paho-mqtt gpiozero spidev
+pip3 install paho-mqtt gpiozero spidev psutil
 ```
 
 

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/jarvis/jarvis.py", line 18, in <module>
+    import engine.lib.helper as helper
+  File "/jarvis/engine/lib/helper.py", line 7, in <module>
+    import paho.mqtt.client as mqtt
+ModuleNotFoundError: No module named 'paho'

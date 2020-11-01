@@ -139,7 +139,6 @@ try:
 				helper.log("hotword", "start transmitting speech")
 				hotword_detected = True
 except KeyboardInterrupt:
-	mqtt.publish("jarvis/hotword", "error")
 	mqtt.publish("jarvis/hotword", "stopped")
 	exit(1)
 except Exception as e:
